@@ -3,7 +3,7 @@
 * **Estado:** aceptada
 * **Fecha:** 2026-11-03
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
-* **Consultados (ASC):** Sergio Gutiez, Sara Guillen
+* **Consultados (ASC):** Sergio González, Sara Guillen
 * **Informados (ASJ):** David Sticea, Elena Romera
 
 ## Contexto y Planteamiento del Problema
@@ -52,6 +52,6 @@ Opción elegida: "**Segregación física en dos instancias de PostgreSQL 19 inde
 ## Validación y Trazabilidad UML
 * **Modelado ASJ:** El diagrama de paquetes `Arquitecturas/0001-estilo-arquitectonico-monolito-semana1.puml` refleja explícitamente dos subsistemas de acceso a datos independientes: `AdminDataGateway` conectado al conector `PostgreSQL 19 - Admin/Redacción` y `SubscriberDataGateway` conectado al conector `PostgreSQL 19 - Suscriptores`.
 * **Notas de Discusión ASS-ASC:**
-  * *Intervención de Sergio Gutiez (ASC):* Sergio preguntó si la segregación física obligaría a utilizar transacciones distribuidas.
+  * *Intervención de Sergio González (ASC):* Sergio preguntó si la segregación física obligaría a utilizar transacciones distribuidas.
   * *Respuesta de Enrique Aldama (ASS):* Se aclaró que no, ya que no se comparten entidades entre redactores y suscriptores. Los redactores solo escriben noticias y leen métricas, mientras que los suscriptores solo validan tokens de acceso y ciclos de pago contra su propia base, por lo que no se requieren transacciones distribuidas.
   * *Intervención de Sara Guillen (ASC):* Sara validó que esta separación física es indispensable para salvaguardar el anonimato estricto y aislar las credenciales de Stripe.

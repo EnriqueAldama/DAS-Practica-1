@@ -3,7 +3,7 @@
 * **Estado:** [propuesta | aceptada | rechazada | superada por ADR-XXXX]
 * **Fecha:** [AAAA-MM-DD]
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
-* **Consultados (ASC):** Sergio Gutiez, Sara Guillen
+* **Consultados (ASC):** Sergio González, Sara Guillen
 * **Informados (ASJ):** David Sticea, Elena Romera
 
 ## Contexto y Planteamiento del Problema
@@ -44,4 +44,4 @@ Opción elegida: "**[Opción X]**", porque:
 
 ## Validación y Trazabilidad UML
 * **Modelado ASJ:** [Indicar qué diagrama de clases/paquetes en `REPO/Arquitecturas/` refleja esta decisión].
-* **Notas de Discusión ASS-ASC:** [Resumen del debate con Sergio Gutiez / Sara Guillen y respuesta técnica de los ASS].
+* **Notas de Discusión ASS-ASC:** [Resumen del debate con Sergio González / Sara Guillen y respuesta técnica de los ASS].

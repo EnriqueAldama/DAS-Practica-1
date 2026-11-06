@@ -3,7 +3,7 @@
 * **Estado:** propuesta
 * **Fecha:** 2026-11-03
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
-* **Consultados (ASC):** Sergio Gutiez, Sara Guillen
+* **Consultados (ASC):** Sergio González, Sara Guillen
 * **Informados (ASJ):** David Sticea, Elena Romera
 
 ## Contexto y Planteamiento del Problema
@@ -55,7 +55,7 @@ Opción elegida: "**Monolito en capas MVC con renderizado de vistas en servidor*
 * **Modelado ASJ:** El diagrama `REPO/Arquitecturas/0001-estilo-arquitectonico-monolito-semana1.puml` modela el monolito propuesto. Muestra el componente `DiscriminadorDispositivo`, los controladores `ControladorPC` y `ControladorTablet`, el motor `MotorPlantillasHTML`, los servicios de aplicación (`ServicioNoticias`, `ServicioSuscripciones`, `ServicioFacturacion`, `ServicioEstadisticas`) y los dos componentes de persistencia (`AdminRedaccionDAO` y `SuscriptoresDAO`).
 * **Notas de Discusión ASS-ASC:**
   * *Objeción de Sara Guillen (ASC):* Señala que el Anexo I exige peticiones HTTP/REST entre cliente y servidor. Un monolito con vistas HTML en servidor entra en contradicción con esa indicación.
-  * *Objeción de Sergio Gutiez (ASC):* Advierte que un monolito que gestione dos bases de datos PostgreSQL 19 distintas genera problemas de mantenimiento y escalabilidad.
+  * *Objeción de Sergio González (ASC):* Advierte que un monolito que gestione dos bases de datos PostgreSQL 19 distintas genera problemas de mantenimiento y escalabilidad.
   * *Respuesta técnica ASS (Antonio Machuca y Enrique Aldama):* Se acepta la propuesta de monolito exclusivamente como punto de partida de Semana 1 para validar los requisitos del dominio y la discriminación de terminales. La decisión permanece en estado `propuesta`. Los ASS confirman que evaluarán la migración al estilo cliente-servidor con API REST antes de la fecha límite del 10 de noviembre fijada en la guía de la práctica.
 
 ## Referencias
