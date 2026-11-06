@@ -1,0 +1,59 @@
+@startuml 0001-estilo-arquitectonico-monolito-semana1
+
+skinparam packageStyle rectangle
+
+title Diagrama - Monolito en capas MVC (Semana 1)
+
+package "PkgPresentacion" {
+    [DiscriminadorDispositivo]
+    [ControladorPC]
+    [ControladorTablet]
+    [MotorPlantillasHTML]
+}
+
+package "PkgNegocio" {
+    [ServicioNoticias]
+    [ServicioSuscripciones]
+    [ServicioFacturacion]
+    [ServicioEstadisticas]
+}
+
+package "PkgDatos" {
+    [AdminRedaccionDAO]
+    [SuscriptoresDAO]
+}
+
+database "PostgreSQL 19 - Admin / Redacción" as DB_Admin
+database "PostgreSQL 19 - Suscriptores" as DB_Subs
+
+cloud "Servicios Externos" {
+    [Pasarela Stripe API]
+}
+
+' Presentación
+[DiscriminadorDispositivo] --> [ControladorPC] : User-Agent PC
+[DiscriminadorDispositivo] --> [ControladorTablet] : User-Agent Tablet
+[ControladorPC] --> [MotorPlantillasHTML]
+[ControladorTablet] --> [MotorPlantillasHTML]
+
+' Presentación -> Negocio
+[ControladorPC] --> [ServicioNoticias]
+[ControladorPC] --> [ServicioSuscripciones]
+[ControladorTablet] --> [ServicioNoticias]
+[ControladorTablet] --> [ServicioSuscripciones]
+[ServicioSuscripciones] --> [ServicioFacturacion]
+
+' Negocio -> Datos
+[ServicioNoticias] --> [AdminRedaccionDAO]
+[ServicioEstadisticas] --> [AdminRedaccionDAO]
+[ServicioSuscripciones] --> [SuscriptoresDAO]
+[ServicioFacturacion] --> [SuscriptoresDAO]
+
+' Datos -> Bases de datos
+[AdminRedaccionDAO] --> DB_Admin
+[SuscriptoresDAO] --> DB_Subs
+
+' Sistema externo
+[ServicioFacturacion] ..> [Pasarela Stripe API] : Cobro y reintentos
+
+@enduml
