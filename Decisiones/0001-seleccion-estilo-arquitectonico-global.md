@@ -1,6 +1,6 @@
 # 0001 - Selección del Estilo Arquitectónico Global
 
-* **Estado:** propuesta
+* **Estado:** superada por ADR-0003
 * **Fecha:** 2026-11-03
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
 * **Consultados (ASC):** Sergio González, Sara Guillen
@@ -57,6 +57,7 @@ Opción elegida: "**Monolito en capas MVC con renderizado de vistas en servidor*
   * *Objeción de Sara Guillen (ASC):* Señala que el Anexo I exige peticiones HTTP/REST entre cliente y servidor. Un monolito con vistas HTML en servidor entra en contradicción con esa indicación.
   * *Objeción de Sergio González (ASC):* Advierte que un monolito que gestione dos bases de datos PostgreSQL 19 distintas genera problemas de mantenimiento y escalabilidad.
   * *Respuesta técnica ASS (Antonio Machuca y Enrique Aldama):* Se acepta la propuesta de monolito exclusivamente como punto de partida de Semana 1 para validar los requisitos del dominio y la discriminación de terminales. La decisión permanece en estado `propuesta`. Los ASS confirman que evaluarán la migración al estilo cliente-servidor con API REST antes de la fecha límite del 10 de noviembre fijada en la guía de la práctica.
+  * *Resolución final: * Decisión formalmente superada y anulada por la ADR-0003 tras el debate con los ASC antes del 10 de noviembre, adoptando la arquitectura Cliente-Servidor con API REST.
 
 ## Referencias
 * Microsoft Azure Architecture Center, "Estilo de arquitectura de n niveles", [https://learn.microsoft.com/es-es/azure/architecture/guide/architecture-styles/n-tier](https://learn.microsoft.com/es-es/azure/architecture/guide/architecture-styles/n-tier)
