@@ -48,3 +48,4 @@ El repositorio organiza los elementos del diseno en tres carpetas:
 
 ### 3. Modelado Arquitectonico UML
 * **Diagrama de Clases:**
+  ![Estilo arquitectónico monolítico](Arquitecturas/0001-estilo-arquitectonico-monolito-semana1.png)
