@@ -32,8 +32,9 @@ database "PostgreSQL 19\n(Admin / Redacción)" as DB_Admin
 database "PostgreSQL 19\n(Suscriptores)" as DB_Subs
 
 cloud "Servicios Externos" {
-    class "Pasarela Stripe API" as StripeAPI <<external>>
+    component [Pasarela Stripe API] as StripeAPI <<external service>>
 }
+
 
 ' Flujo en Presentación
 DiscriminadorDispositivo --> ControladorPC : peticiones PC (User-Agent)
@@ -68,6 +69,6 @@ AdminRedaccionDAO --> DB_Admin : operaciones SQL
 SuscriptoresDAO --> DB_Subs : operaciones SQL
 
 ' Negocio -> Servicios Externos
-ServicioFacturacion ..> StripeAPI : cobro y reintentos (máx 3)
+ServicioFacturacion ..> StripeAPI : HTTPS / REST (máx 3 reintentos)
 
 @enduml
