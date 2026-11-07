@@ -24,8 +24,8 @@ package "PkgNegocio" {
 }
 
 package "PkgDatos" {
-    class AdminPersistenceGateway <<dao>>
-    class SubscriberPersistenceGateway <<dao>>
+    class AdminRedaccionDAO <<dao>>
+    class SuscriptoresDAO <<dao>>
 }
 
 database "PostgreSQL 19\n(Admin / Redacción)" as DB_Admin
@@ -57,15 +57,15 @@ ControladorAdminRedaccion --> ServicioEstadisticas : consultar métricas de uso
 ServicioSuscripciones --> ServicioFacturacion : tramitar cobro de cuota
 
 ' Negocio -> Datos
-ServicioNoticias --> AdminPersistenceGateway
-ServicioEstadisticas --> AdminPersistenceGateway
+ServicioNoticias --> AdminRedaccionDAO
+ServicioEstadisticas --> AdminRedaccionDAO
 
-ServicioSuscripciones --> SubscriberPersistenceGateway
-ServicioFacturacion --> SubscriberPersistenceGateway
+ServicioSuscripciones --> SuscriptoresDAO
+ServicioFacturacion --> SuscriptoresDAO
 
 ' Datos -> Bases de datos
-AdminPersistenceGateway --> DB_Admin : operaciones SQL
-SubscriberPersistenceGateway --> DB_Subs : operaciones SQL
+AdminRedaccionDAO --> DB_Admin : operaciones SQL
+SuscriptoresDAO --> DB_Subs : operaciones SQL
 
 ' Negocio -> Servicios Externos
 ServicioFacturacion ..> StripeAPI : cobro y reintentos (máx 3)
