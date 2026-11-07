@@ -7,51 +7,60 @@
 * **Informados (ASJ):** David Sticea, Elena Romera
 
 ## Contexto y Planteamiento del Problema
-La especificación del periódico digital impone la existencia de dos bases de datos PostgreSQL 19 en el back-end: una destinada a los administradores y redactores (gestión editorial de las cinco secciones y almacenamiento de métricas de lectura y permanencia) y otra reservada exclusivamente para los suscriptores y la verificación de sus derechos de lectura anónima. La pregunta arquitectónica radica en cómo estructurar el aislamiento de estos almacenes de datos y su integración técnica con los componentes del servidor garantizando la máxima seguridad, confidencialidad y rendimiento.
+El sistema del periódico digital requiere almacenar datos editoriales y métricas de uso (noticias en cinco secciones, tiempo de permanencia, tasas de rebote) por un lado, y datos de lectores (tokens anónimos y suscripciones con Stripe) por otro. El Anexo I exige dos bases de datos PostgreSQL 19 independientes: una para administradores y redactores, y otra para suscriptores. Debemos decidir la estrategia de aislamiento y el modo de conexión entre los componentes del servidor y ambos almacenes de datos.
 
 ## Requisitos Motivadores (Decision Drivers)
 * **Requisito(s) Clave:** RD5 - Segregación física obligatoria de datos
-* **Restricción de Privacidad y Seguridad:** Impedir que accesos o brechas en el subsistema público/suscriptores comprometan la base de datos de administración y redacción, y viceversa.
-* **Optimización de Velocidad:** Evitar que una gran cantidad de entradas en la base de datos de suscriptores afecten a al rendimiento de la base de datos de administración y redacción.
+* **Restricción de Dominio:** RD2 - Preservación de anonimato en suscripciones
 
 ## Opciones Consideradas
-* **Opción 1:** Segregación física en dos instancias de PostgreSQL 19 independientes con Gateways/DAOs desacoplados por subsistema.
-* **Opción 2:** Base de datos PostgreSQL 19 única lógica segregada por esquemas (`schema_admin` y `schema_suscriptores`) y control de acceso basado en roles (RBAC).
-* **Opción 3:** Uso de la replicación lógica unidireccional de PostgreSQL para actualizar cambios (publicación/suscripción nativa) entre la base editorial y la de lectores.
+* **Opción 1:** [Dos instancias independientes de PostgreSQL 19 en servidores y puertos separados (5432 y 5433) con DAOs desacoplados (`AdminRedaccionDAO` y `SuscriptoresDAO`)](https://microservices.io/patterns/data/database-per-service.html)
+* **Opción 2:** [Una única instancia de servidor PostgreSQL 19 con dos bases de datos lógicas independientes (`bd_admin` y `bd_suscriptores`) en el puerto 5432 y control de acceso por roles (RBAC)](https://www.postgresql.org/docs/current/managing-databases.html)
+* **Opción 3:** [Dos instancias independientes de PostgreSQL 19 con replicación lógica nativa de artículos desde la base editorial hacia la de suscriptores](https://www.postgresql.org/docs/current/logical-replication.html)
 
 ## Decisión Adoptada
-Opción elegida: "**Segregación física en dos instancias de PostgreSQL 19 independientes con Gateways/DAOs desacoplados por subsistema**", porque:
-* Cumple estrictamente el mandato de aislamiento físico de la especificación oficial, garantizando que el subsistema de redacción y métricas (noticias de las 5 secciones, tasas de rebote y tiempos de lectura) resida en un servidor/puerto de base de datos totalmente diferenciado del subsistema de suscriptores anónimos.
-* Reduce la superficie de ataque: un compromiso de seguridad en la base pública de suscriptores jamás expondrá las credenciales, artículos embargados o paneles analíticos de los administradores.
-* Facilita políticas de afinamiento (*tuning*), copias de seguridad e indexación diferenciadas: la base de lectores prioriza transacciones concurrentes de lectura y consultas por tokens de suscripción, mientras que la editorial prioriza operaciones transaccionales de escritura de noticias y consultas analíticas agregadas.
+Opción elegida: "**Dos instancias independientes de PostgreSQL 19 en servidores y puertos separados (5432 y 5433) con DAOs desacoplados (`AdminRedaccionDAO` y `SuscriptoresDAO`)**", porque:
+* Garantiza el aislamiento de recursos del sistema operativo (CPU, memoria y disco). Las consultas analíticas de métricas editoriales no saturan la base de datos de suscriptores.
+* Aplica el principio de mínimo privilegio en red. El pool de conexiones de suscriptores no tiene acceso de red al puerto de la base de datos editorial.
+* Evita la posibilidad de realizar consultas `JOIN` directas entre los tokens de suscriptores y las lecturas de noticias, garantizando el anonimato exigido en RD2.
 
 ### Consecuencias
-* **Positivas:** Aislamiento total de fallos de infraestructura entre el entorno editorial y el de lectores; imposibilidad física de ejecutar *queries cross-database* accidentales; máxima conformidad con las restricciones de dominio de la práctica.
-* **Negativas:** Obliga a mantener dos *pools* de conexiones independientes en el servidor; prohíbe realizar operaciones transaccionales ACID distribuidas nativas entre ambas bases de datos sin recurrir a patrones de coordinación a nivel de aplicación (ej. Saga o eventos).
-* **Neutras:** Requiere que los ASJ modelen dos paquetes y jerarquías de persistencia claramente segregados (`AdminPersistenceGateway` y `SubscriberPersistenceGateway`).
+* **Positivas:** Aislamiento de fallos entre ambos entornos de datos. Si una instancia cae por sobrecarga o mantenimiento, la otra continúa en servicio.
+* **Negativas:** Obliga a gestionar dos pools de conexiones independientes en el servidor. Impide realizar transacciones ACID nativas entre ambos almacenes.
+* **Neutras:** Requiere mantener dos componentes de acceso a datos independientes en la capa de datos: `AdminRedaccionDAO` y `SuscriptoresDAO`.
 
 ## Pros y Contras de las Opciones Consideradas
 
-### Segregación física en dos instancias de PostgreSQL 19 independientes con Gateways/DAOs desacoplados por subsistema
-* **A favor (+):** Cumplimiento riguroso del Anexo I; aislamiento total de rendimiento (las consultas intensivas de métricas editoriales como tasa de rebote o tiempo de permanencia no degradan las comprobaciones de suscripción de los lectores).
-* **A favor (+):** Preservación absoluta del principio de mínimo privilegio y privacidad: las credenciales de conexión del pool de suscriptores no tienen permisos de red ni acceso al motor editorial.
-* **En contra (-):** Mayor coste y complejidad de configuración de infraestructura, requiriendo el aprovisionamiento y mantenimiento de dos servidores PostgreSQL 19 en puertos/contenedores separados.
-* **En contra (-):** Imposibilidad de realizar sentencias `JOIN` directas entre las noticias leídas y los tokens anónimos de suscriptores; cualquier correlación estadística debe procesarse en la capa de servicios.
+### Dos instancias independientes de PostgreSQL 19 en servidores y puertos separados con DAOs desacoplados
+* **A favor (+):** Cumple el requisito RD5 al separar físicamente los motores de base de datos en los puertos 5432 y 5433, eliminando un punto único de fallo para ambos subsistemas.
+* **A favor (+):** Aislamiento de rendimiento. Permite configurar memoria (`shared_buffers`, `work_mem`) y límites de conexiones adaptados a cada perfil: lecturas concurrentes de tokens en suscriptores frente a escrituras y agregaciones analíticas en redacción.
+* **A favor (+):** Principio de mínimo privilegio. Las credenciales de red del pool de suscriptores no tienen acceso físico ni permisos sobre el puerto 5432 de administración.
+* **A favor (+):** Anonimato estricto (RD2). La separación de motores imposibilita sentencias SQL `JOIN` entre las lecturas de noticias y los tokens de suscriptores en la base de datos.
+* **En contra (-):** Mayor coste operativo. Requiere desplegar, configurar y monitorizar dos procesos o contenedores de base de datos independientes.
+* **En contra (-):** Correlación en capa de negocio. Cualquier estadística combinada entre noticias y suscripciones debe resolverse en el componente `ServicioEstadisticas`.
 
-### Base de datos PostgreSQL 19 única lógica segregada por esquemas (`schema_admin` y `schema_suscriptores`) y control de acceso RBAC
-* **A favor (+):** Menor consumo de recursos de computación y simplificación del aprovisionamiento al gestionar una única instancia de servidor PostgreSQL 19.
-* **A favor (+):** Facilita la administración de copias de seguridad en un único archivo de volcado (*dump*).
-* **En contra (-):** Incumple la directriz del Anexo I que exige expresamente dos bases de datos separadas para administradores y suscriptores.
-* **En contra (-):** Riesgo de fuga de información o salto de permisos si falla la configuración RBAC a nivel de esquema, compartiendo CPU, memoria y el mismo proceso del motor gestor.
+### Una única instancia de servidor PostgreSQL 19 con dos bases de datos lógicas independientes
+* **A favor (+):** Reduce el consumo de memoria en el servidor al ejecutar un solo proceso gestor de base de datos.
+* **A favor (+):** Simplifica la operativa de copias de seguridad al consolidar la administración en una única instancia.
+* **En contra (-):** Una consulta analítica pesada de estadísticas editoriales consume CPU y memoria del mismo proceso que valida tokens de suscriptores.
+* **En contra (-):** Un fallo o reinicio del motor PostgreSQL 19 interrumpe el acceso de administradores y suscriptores de forma simultánea.
+* **En contra (-):** Riesgo de acceso no autorizado entre bases de datos lógicas si ocurre un error de configuración en los roles y permisos RBAC del motor.
 
-### Replicación lógica unidireccional de PostgreSQL 19 (publicación/suscripción nativa) entre la base editorial y la de lectores
-* **A favor (+):** Permite sincronizar noticias publicadas en las 5 secciones desde la base de redacción hacia la base de suscriptores de forma automática mediante el motor nativo de replicación lógica de PostgreSQL 19.
-* **En contra (-):** Introduce una notable complejidad operativa en la gestión de conflictos de réplica, slots de replicación y desincronización en caso de caídas transitorias de red.
-* **En contra (-):** Difumina la propiedad del dato y no resuelve el aislamiento bidireccional necesario para las suscripciones anónimas y los cobros de Stripe.
+### Dos instancias independientes de PostgreSQL 19 con replicación lógica nativa
+* **A favor (+):** Permite que la base de suscriptores mantenga una copia local de las noticias de las cinco secciones para lecturas directas.
+* **En contra (-):** Añade complejidad en la gestión de conflictos de réplica, slots de replicación y retrasos de sincronización de red.
+* **En contra (-):** No aporta valor al subsistema de suscriptores, ya que los lectores solo necesitan validar su suscripción y no requieren una copia local de la base editorial.
+* **En contra (-):** Incrementa el uso de almacenamiento en disco al duplicar el contenido informativo en ambos motores.
 
 ## Validación y Trazabilidad UML
-* **Modelado ASJ:** El diagrama de paquetes `Arquitecturas/0001-estilo-arquitectonico-monolito-semana1.puml` refleja explícitamente dos subsistemas de acceso a datos independientes: `AdminDataGateway` conectado al conector `PostgreSQL 19 - Admin/Redacción` y `SubscriberDataGateway` conectado al conector `PostgreSQL 19 - Suscriptores`.
+* **Modelado ASJ:** El diagrama `Arquitecturas/0001-estilo-arquitectonico-monolito-semana1.puml` muestra la capa de datos con dos componentes: `AdminRedaccionDAO` conectado a la base `PostgreSQL 19 (Instancia Editorial)` en puerto 5432, y `SuscriptoresDAO` conectado a la base `PostgreSQL 19 (Instancia Suscriptores)` en puerto 5433.
 * **Notas de Discusión ASS-ASC:**
-  * *Intervención de Sergio González (ASC):* Sergio preguntó si la segregación física obligaría a utilizar transacciones distribuidas.
-  * *Respuesta de Enrique Aldama (ASS):* Se aclaró que no, ya que no se comparten entidades entre redactores y suscriptores. Los redactores solo escriben noticias y leen métricas, mientras que los suscriptores solo validan tokens de acceso y ciclos de pago contra su propia base, por lo que no se requieren transacciones distribuidas.
-  * *Intervención de Sara Guillen (ASC):* Sara validó que esta separación física es indispensable para salvaguardar el anonimato estricto y aislar las credenciales de Stripe.
+  * *Intervención de Sergio González (ASC):* Sergio preguntó si la separación en dos instancias independientes exige transacciones distribuidas (2PC).
+  * *Respuesta de Enrique Aldama (ASS):* Se aclaró que no existen operaciones transaccionales conjuntas. Los redactores publican noticias y consultan métricas en su propia base. Los lectores gestionan altas, bajas y pagos en la base de suscriptores.
+  * *Intervención de Sara Guillen (ASC):* Sara validó que esta separación física es indispensable para salvaguardar el anonimato estricto (RD2) y aislar las credenciales de Stripe.
+
+## Referencias
+* Chris Richardson, "Pattern: Database per service", [https://microservices.io/patterns/data/database-per-service.html](https://microservices.io/patterns/data/database-per-service.html)
+* PostgreSQL Global Development Group, "PostgreSQL Documentation: Chapter 23. Managing Databases", [https://www.postgresql.org/docs/current/managing-databases.html](https://www.postgresql.org/docs/current/managing-databases.html)
+* PostgreSQL Global Development Group, "PostgreSQL Documentation: Chapter 31. Logical Replication", [https://www.postgresql.org/docs/current/logical-replication.html](https://www.postgresql.org/docs/current/logical-replication.html)
+* Martin Fowler, "Patterns of Enterprise Application Architecture: Table Data Gateway", [https://martinfowler.com/eaaCatalog/tableDataGateway.html](https://martinfowler.com/eaaCatalog/tableDataGateway.html)
