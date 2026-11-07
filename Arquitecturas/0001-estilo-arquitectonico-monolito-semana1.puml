@@ -1,59 +1,73 @@
 @startuml 0001-estilo-arquitectonico-monolito-semana1
 
-skinparam packageStyle rectangle
+allowmixing
 
-title Diagrama - Monolito en capas MVC (Semana 1)
+skinparam packageStyle rectangle
+skinparam shadowing false
+hide empty members
+
+title Diagrama de Clases y Paquetes - Monolito en Capas (Semana 1)
 
 package "PkgPresentacion" {
-    [DiscriminadorDispositivo]
-    [ControladorPC]
-    [ControladorTablet]
-    [MotorPlantillasHTML]
+    class DiscriminadorDispositivo <<controller>>
+    class ControladorPC <<controller>>
+    class ControladorTablet <<controller>>
+    class ControladorAdminRedaccion <<controller>>
+    class MotorPlantillasHTML <<boundary>>
 }
 
 package "PkgNegocio" {
-    [ServicioNoticias]
-    [ServicioSuscripciones]
-    [ServicioFacturacion]
-    [ServicioEstadisticas]
+    class ServicioNoticias <<service>>
+    class ServicioSuscripciones <<service>>
+    class ServicioFacturacion <<service>>
+    class ServicioEstadisticas <<service>>
 }
 
 package "PkgDatos" {
-    [AdminRedaccionDAO]
-    [SuscriptoresDAO]
+    class AdminPersistenceGateway <<dao>>
+    class SubscriberPersistenceGateway <<dao>>
 }
 
-database "PostgreSQL 19 - Admin / Redacción" as DB_Admin
-database "PostgreSQL 19 - Suscriptores" as DB_Subs
+database "PostgreSQL 19\n(Admin / Redacción)" as DB_Admin
+database "PostgreSQL 19\n(Suscriptores)" as DB_Subs
 
 cloud "Servicios Externos" {
-    [Pasarela Stripe API]
+    class "Pasarela Stripe API" as StripeAPI <<external>>
 }
 
-' Presentación
-[DiscriminadorDispositivo] --> [ControladorPC] : User-Agent PC
-[DiscriminadorDispositivo] --> [ControladorTablet] : User-Agent Tablet
-[ControladorPC] --> [MotorPlantillasHTML]
-[ControladorTablet] --> [MotorPlantillasHTML]
+' Flujo en Presentación
+DiscriminadorDispositivo --> ControladorPC : peticiones PC (User-Agent)
+DiscriminadorDispositivo --> ControladorTablet : peticiones Tablet (User-Agent)
+
+ControladorPC --> MotorPlantillasHTML : solicita renderizado vista
+ControladorTablet --> MotorPlantillasHTML : solicita renderizado vista
+ControladorAdminRedaccion --> MotorPlantillasHTML : solicita renderizado panel
 
 ' Presentación -> Negocio
-[ControladorPC] --> [ServicioNoticias]
-[ControladorPC] --> [ServicioSuscripciones]
-[ControladorTablet] --> [ServicioNoticias]
-[ControladorTablet] --> [ServicioSuscripciones]
-[ServicioSuscripciones] --> [ServicioFacturacion]
+ControladorPC --> ServicioNoticias : consultar noticias
+ControladorPC --> ServicioSuscripciones : gestionar suscripción
+
+ControladorTablet --> ServicioNoticias : consultar noticias
+ControladorTablet --> ServicioSuscripciones : gestionar suscripción
+
+ControladorAdminRedaccion --> ServicioNoticias : publicar noticias
+ControladorAdminRedaccion --> ServicioEstadisticas : consultar métricas de uso
+
+' Negocio interno
+ServicioSuscripciones --> ServicioFacturacion : tramitar cobro de cuota
 
 ' Negocio -> Datos
-[ServicioNoticias] --> [AdminRedaccionDAO]
-[ServicioEstadisticas] --> [AdminRedaccionDAO]
-[ServicioSuscripciones] --> [SuscriptoresDAO]
-[ServicioFacturacion] --> [SuscriptoresDAO]
+ServicioNoticias --> AdminPersistenceGateway
+ServicioEstadisticas --> AdminPersistenceGateway
+
+ServicioSuscripciones --> SubscriberPersistenceGateway
+ServicioFacturacion --> SubscriberPersistenceGateway
 
 ' Datos -> Bases de datos
-[AdminRedaccionDAO] --> DB_Admin
-[SuscriptoresDAO] --> DB_Subs
+AdminPersistenceGateway --> DB_Admin : operaciones SQL
+SubscriberPersistenceGateway --> DB_Subs : operaciones SQL
 
-' Sistema externo
-[ServicioFacturacion] ..> [Pasarela Stripe API] : Cobro y reintentos
+' Negocio -> Servicios Externos
+ServicioFacturacion ..> StripeAPI : cobro y reintentos (máx 3)
 
 @enduml
