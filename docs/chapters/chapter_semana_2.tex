@@ -1,0 +1,50 @@
+\chapter{Semana 2: seguimiento de la arquitectura e incorporación del API Gateway}
+
+Durante la segunda semana se continuó desarrollando la arquitectura a partir del estilo cliente-servidor seleccionado anteriormente.
+
+En esta fase se comenzaron a resolver problemas de diseño más concretos, relacionados con la distribución de responsabilidades entre los componentes del sistema. Una de las decisiones tratadas fue la incorporación de un API Gateway para resolver el requisito RF1, que establece que el periódico digital debe distinguir entre los clientes PC y Tablet.
+
+\section{Decisión 0002: incorporación del API Gateway}
+
+En la \href{Decisiones/0002.1-api-gateway-discriminacion-clientes.md}{ADR-0002.1}, los arquitectos senior propusieron incorporar un API Gateway como punto de entrada de las peticiones HTTP/REST. La finalidad de este componente era realizar la identificación del tipo de dispositivo antes de que las peticiones llegaran a los controladores del backend.
+
+Para resolver este problema se valoraron diferentes alternativas, como realizar la identificación desde el frontend, utilizar un middleware en el backend o incorporar un API Gateway. En el caso del frontend, se podría utilizar CSS y JavaScript para adaptar la interfaz según el dispositivo, pero esto no garantiza que el backend sepa si el usuario está accediendo desde un PC o una Tablet.
+
+Por otra parte, el middleware permitiría identificar los dispositivos directamente desde el backend, sin necesidad de añadir otro componente. Finalmente, los arquitectos senior eligieron el API Gateway porque permitía realizar esta identificación por separado, sin que los controladores del backend tuvieran que encargarse de ello.
+
+Esta decisión fue cuestionada posteriormente por los arquitectos cognitivos, ya que se planteó si realmente era necesario añadir este componente a la arquitectura.
+
+\section{Revisión crítica de los arquitectos cognitivos}
+
+Durante la revisión de la decisión se cuestionó si realmente era necesario incorporar un API Gateway únicamente para distinguir entre PC y Tablet, ya que esto suponía añadir otro componente a la arquitectura del periódico.
+
+Esta duda quedó recogida en la \href{Decisiones/0002.2-cuestionamiento-incorporacion-api-gateway.md}{ADR-0002.2}, donde se planteó si esta función podía resolverse de una forma más sencilla. Como respuesta se explicó que el profesor Rafael Capilla había recomendado utilizar un API Gateway para separar la identificación de dispositivos del backend. Además, para evitar complicar demasiado la arquitectura se decidió que el API Gateway solo tendría dos funciones: identificar si el usuario accede desde un PC o una Tablet y redirigir las peticiones HTTP/REST al controlador correspondiente. De esta forma, se mantenía la identificación de dispositivos separada del resto de funcionalidades del periódico, sin añadir más responsabilidades al API Gateway.
+
+\section{Reafirmación de la decisión}
+
+Después de la discusión entre los arquitectos senior y cognitivos se decidió mantener el API Gateway. Esta decisión quedó recogida en la \href{Decisiones/0002.3-reafirmacion-incorporacion-api-gateway.md}{ADR-0002.3}.
+
+Aunque se había cuestionado su incorporación, los arquitectos senior consideraron que era una buena opción porque permitía identificar los dispositivos sin que los controladores de noticias, suscripciones y pagos tuvieran que realizar esta comprobación, aunque también se tuvieron en cuenta sus inconvenientes. Por una parte, se añadía un componente más a la arquitectura y las peticiones tenían que pasar por él antes de llegar al backend.
+
+Finalmente, se mantuvo la decisión inicial, confirmando que el API Gateway únicamente se encargaría de identificar el dispositivo y redirigir las peticiones. Esta incorporación no supone cambiar la arquitectura cliente-servidor con API REST elegida durante la primera semana, sino añadir un componente para resolver el requisito RF1.
+
+\section{Representación de la arquitectura en UML}
+
+Una vez tomadas las decisiones, los arquitectos junior continuaron trabajando en el diagrama UML para representar los cambios realizados en la arquitectura.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{assets/0002-estilo-cliente-servidor-rest-semana2.pdf}
+    \caption{Evolución de la arquitectura cliente-servidor con API REST.}
+    \label{fig:arquitectura-api-rest-gateway}
+\end{figure}
+
+En este segundo diagrama se representa la separación entre el frontend y el backend, que se comunican mediante HTTP/REST. Además, se incluye el API Gateway.
+
+Según lo establecido en la ADR-0002, el paquete \texttt{PkgApiGateway} debe contener el componente \texttt{ApiGateway} y la clase \texttt{DeviceDiscriminator}, encargada de identificar si el cliente es un PC o una Tablet. Las peticiones HTTP/REST deben pasar primero por el API Gateway y después llegar a los controladores del backend. También es importante que la identificación de dispositivos no se repita en otros componentes, ya que se ha elegido el API Gateway para encargarse de esta función. Por tanto, los arquitectos junior deben comprobar que estos elementos aparecen correctamente representados en el diagrama UML.
+
+\section{Resultado de la segunda semana}
+
+Durante la segunda semana se continuó desarrollando la arquitectura cliente-servidor y se tomó la decisión de incorporar un API Gateway para distinguir entre PC y Tablet. Aunque los arquitectos cognitivos cuestionaron si realmente era necesario añadir este componente, finalmente los arquitectos senior decidieron mantenerlo, limitando sus funciones para no complicar demasiado la arquitectura.
+
+Todo este proceso quedó recogido en las ADR-0002.1, ADR-0002.2 y ADR-0002.3, donde se documentaron la decisión inicial, las dudas planteadas y su posterior verificación.

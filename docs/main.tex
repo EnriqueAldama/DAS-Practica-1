@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% Compilar desde esta carpeta con LuaLaTeX o XeLaTeX.
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+\geometry{margin=2.5cm}
+\setlength{\parskip}{0.45em}
+\setlength{\parindent}{0pt}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=black}
+\renewcommand{\arraystretch}{1.2}
+
+\title{Diseño y Arquitectura del Software\\[0.5em]
+\large Práctica 1: Arquitectura de un periódico digital}
+\author{\textbf{Autores:} completar\\[0.5em]
+\textbf{Grupo:} completar}
+\date{Curso académico 2026--2027}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{3cm}
+    {\Large Universidad Rey Juan Carlos\par}
+    \vspace{2.5cm}
+    {\huge\bfseries Diseño y Arquitectura del Software\par}
+    \vspace{1cm}
+    {\LARGE Práctica 1\par}
+    \vspace{0.5cm}
+    {\large Arquitectura de un periódico digital\par}
+    \vfill
+    {\large Autores: completar\par}
+    \vspace{0.3cm}
+    {\large Grupo: completar\par}
+    \vspace{1cm}
+    {\large Curso académico 2026--2027\par}
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+% Capítulos estructurados de la memoria.
+\input{chapters/chapter_01_introduccion}
+\input{chapters/chapter_semana_1}
+\input{chapters/chapter_semana_2}
+
+\end{document}

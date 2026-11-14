@@ -1,0 +1,69 @@
+\chapter{Introducción y análisis de requisitos}
+
+\section{Descripción del trabajo}
+
+El objetivo de esta práctica es diseñar la arquitectura software de un periódico digital a partir del caso de estudio.
+
+Para ello, hemos analizado los requisitos funcionales y de dominio, planteado diferentes decisiones arquitectónicas y representado las soluciones mediante diagramas UML de clases y paquetes.
+
+El sistema que tenemos que diseñar cuenta con las siguientes funcionalidades:
+
+\begin{itemize}[leftmargin=*]
+    \item Una interfaz web responsiva para PC y Tablet.
+    \item Suscripción y baja anónima a noticias de política, economía, sociedad, nacionales e internacionales.
+    \item Tres modalidades de suscripción: trimestral (70~€), semestral (130~€) y anual (190~€).
+    \item Gestión de pagos mediante Stripe, permitiendo hasta tres reintentos cuando falla un pago.
+    \item Estadísticas de uso para administradores y redactores.
+    \item Dos bases de datos PostgreSQL 19: una para administradores y redactores y otra para suscriptores.
+\end{itemize}
+
+Durante el desarrollo de la práctica hemos tenido que revisar algunas de las decisiones iniciales, ya que no todas las soluciones propuestas eran correctas para cumplir todos los requisitos y construir la arquitectura que buscábamos. Por eso, las discusiones entre arquitectos senior y cognitivos han sido una parte importante del trabajo. Nos han permitido cuestionar las decisiones, comparar alternativas y corregir algunos problemas antes de continuar con el diseño UML.
+
+\section{Análisis de requisitos}
+
+\subsection{Requisitos funcionales}
+
+En el archivo \href{Requisitos/REQUISITOS.xlsx}{REQUISITOS.xlsx} hemos recogido los seis requisitos funcionales principales del sistema.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.08\textwidth}p{0.24\textwidth}X@{}}
+\toprule
+\textbf{ID} & \textbf{Nombre} & \textbf{Descripción} \\
+\midrule
+RF1 & Discriminación del cliente & El sistema debe distinguir entre los clientes PC y Tablet. \\
+RF2 & Suscripción y baja anónima & Los lectores pueden suscribirse y darse de baja de las diferentes categorías de noticias de forma anónima. \\
+RF3 & Modalidades de suscripción & El sistema permite seleccionar suscripciones trimestrales, semestrales y anuales con sus correspondientes importes. \\
+RF4 & Cobro externalizado & El sistema debe realizar los cobros mediante una pasarela externa. \\
+RF5 & Reintentos de pago & Cuando falla un pago, el sistema debe permitir reintentarlo hasta tres veces. \\
+RF6 & Estadísticas de uso & Los administradores y redactores pueden consultar las noticias más leídas, el tiempo de permanencia, las tasas de rebote y las conversiones a suscriptores. \\
+\bottomrule
+\end{tabularx}
+\caption{Requisitos funcionales del sistema.}
+\label{tab:requisitos-funcionales}
+\end{table}
+
+\subsection{Requisitos de dominio}
+
+También hemos identificado tres requisitos de dominio.
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.08\textwidth}p{0.27\textwidth}X@{}}
+\toprule
+\textbf{ID} & \textbf{Nombre} & \textbf{Descripción} \\
+\midrule
+RD1 & Uso de Stripe & La pasarela de pago utilizada debe ser Stripe. \\
+RD2 & Comunicación HTTP/REST & Las peticiones entre el frontend y el backend deben realizarse mediante HTTP/REST. \\
+RD3 & Bases de datos PostgreSQL 19 & El sistema debe utilizar dos bases de datos PostgreSQL 19, una para administradores y redactores y otra para suscriptores. \\
+\bottomrule
+\end{tabularx}
+\caption{Requisitos de dominio del sistema.}
+\label{tab:requisitos-dominio}
+\end{table}
+
+\subsection{Revisión de los requisitos iniciales}
+
+Durante el análisis inicial planteamos algunos requisitos adicionales porque considerábamos que podían ser necesarios para el funcionamiento del periódico. Sin embargo, después de revisar el enunciado, comprobamos que algunos no estaban bien justificados, dado que los habíamos sacado del contexto y no correspondían a requisitos solicitados en el caso de estudio. Por este motivo, revisamos los requisitos y mantuvimos los relacionados con las funcionalidades y restricciones que teníamos que resolver. Esta revisión fue importante para poder realizar adecuadamente la práctica.
