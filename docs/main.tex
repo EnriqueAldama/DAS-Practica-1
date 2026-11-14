@@ -1,10 +1,22 @@
+% !TEX root = main.tex
 \documentclass[12pt,a4paper,oneside]{report}
 
-% Compilar desde esta carpeta con LuaLaTeX o XeLaTeX.
+% Compilar desde esta carpeta con pdfLaTeX (latexmk), LuaLaTeX o XeLaTeX.
 \usepackage[spanish,es-nodecimaldot]{babel}
-\usepackage{fontspec}
+\usepackage{iftex}
+\ifPDFTeX
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+    \usepackage{textcomp}
+    \usepackage{eurosym}
+    \DeclareUnicodeCharacter{20AC}{\euro}
+\else
+    \usepackage{fontspec}
+\fi
 \usepackage{geometry}
 \usepackage{graphicx}
+\usepackage[inkscapelatex=false]{svg}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{tabularx}
@@ -13,6 +25,11 @@
 \usepackage{xurl}
 \usepackage{enumitem}
 \usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{pdflscape}
+
+\definecolor{urjcred}{RGB}{186, 12, 47}
+\definecolor{urjcslate}{RGB}{75, 85, 99}
 
 \geometry{margin=2.5cm}
 \setlength{\parskip}{0.45em}
@@ -22,28 +39,37 @@
 
 \title{Diseño y Arquitectura del Software\\[0.5em]
 \large Práctica 1: Arquitectura de un periódico digital}
-\author{\textbf{Autores:} completar\\[0.5em]
-\textbf{Grupo:} completar}
+\author{Grupo 5 -- Antonio Machuca, Enrique Aldama, Sergio González, Sara Guillén, David Sticea, Elena Romera}
 \date{Curso académico 2026--2027}
 
 \begin{document}
 
 \begin{titlepage}
     \centering
-    \vspace*{3cm}
-    {\Large Universidad Rey Juan Carlos\par}
-    \vspace{2.5cm}
-    {\huge\bfseries Diseño y Arquitectura del Software\par}
-    \vspace{1cm}
-    {\LARGE Práctica 1\par}
-    \vspace{0.5cm}
-    {\large Arquitectura de un periódico digital\par}
-    \vfill
-    {\large Autores: completar\par}
+    \vspace*{0.1cm}
+    \includesvg[width=3.6cm]{assets/Logo_URJC.svg}\par
+    \vspace{0.45cm}
+    {\scshape\large Universidad Rey Juan Carlos\par}
+    \vspace{0.1cm}
+    {\color{urjcslate}\normalsize Escuela Técnica Superior de Ingeniería Informática\par}
+    {\color{urjcslate}\small Grado en Ingeniería del Software\par}
+
+    \vspace{0.85cm}
+    {\color{urjcred}\rule{\textwidth}{1.6pt}}\par
+    \vspace{0.45cm}
+    {\large\bfseries\color{urjcslate} DISEÑO Y ARQUITECTURA DEL SOFTWARE (DAS)\par}
     \vspace{0.3cm}
-    {\large Grupo: completar\par}
-    \vspace{1cm}
-    {\large Curso académico 2026--2027\par}
+    {\Huge\bfseries Práctica 1\par}
+    \vspace{0.2cm}
+    {\Large Captura y Representación de Decisiones de Diseño:\\[0.15em]
+    Sistema de Periódico Digital\par}
+    \vspace{0.45cm}
+    {\color{urjcred}\rule{\textwidth}{0.7pt}}\par
+
+    \vfill
+    {\color{urjcslate}\normalsize Móstoles, Madrid\par}
+    \vspace{0.12cm}
+    {\bfseries Curso académico 2026--2027\par}
 \end{titlepage}
 
 \pagenumbering{roman}
@@ -55,5 +81,13 @@
 \input{chapters/chapter_01_introduccion}
 \input{chapters/chapter_semana_1}
 \input{chapters/chapter_semana_2}
+
+% Bibliografía desactivada temporalmente hasta su revisión.
+% \clearpage
+% \phantomsection
+% \addcontentsline{toc}{chapter}{\bibname}
+% \nocite{*}
+% \bibliographystyle{plain}
+% \bibliography{references}
 
 \end{document}

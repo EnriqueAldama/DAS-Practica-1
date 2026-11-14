@@ -10,3 +10,5 @@ docs/*.out
 docs/*.synctex.gz
 docs/*.fls
 docs/*.fdb_latexmk
+docs/*.bbl
+docs/*.blg

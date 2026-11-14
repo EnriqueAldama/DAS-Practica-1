@@ -1,4 +1,42 @@
+% !TEX root = ../main.tex
 \chapter{Introducción y análisis de requisitos}
+
+\section{Información general y equipo de trabajo}
+
+
+\subsection{Equipo de trabajo y asignación de roles}
+
+El equipo aplica la separación de roles establecida en la normativa de la asignatura:
+
+\begin{table}[H]
+\centering
+\small
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}p{0.28\textwidth}X@{}}
+\toprule
+\textbf{Integrante} & \textbf{Rol asignado} & \textbf{Responsabilidades principales} \\
+\midrule
+Antonio Machuca & Arquitecto Software Senior (ASS) & Formulación y captura de decisiones arquitectónicas en formato MADR. \\
+Enrique Aldama & Arquitecto Software Senior (ASS) & Formulación y captura de decisiones arquitectónicas en formato MADR. \\
+Sergio González & Arquitecto Software Cognitivo (ASC) & Cuestionamiento crítico, detección de fricciones y propuesta de alternativas. \\
+Sara Guillén & Arquitecto Software Cognitivo (ASC) & Cuestionamiento crítico, análisis de requisitos y validación de arquitectura. \\
+David Sticea & Arquitecto Software Junior (ASJ) & Modelado y documentación UML en PlantUML (diagramas de clases y paquetes). \\
+Elena Romera & Arquitecto Software Junior (ASJ) & Modelado y documentación UML en PlantUML (diagramas de clases y paquetes). \\
+\bottomrule
+\end{tabularx}
+\caption{Equipo de trabajo, roles asignados y responsabilidades principales.}
+\label{tab:equipo-roles}
+\end{table}
+
+\subsection{Estructura del repositorio}
+
+El repositorio organiza los elementos del diseño en las siguientes carpetas:
+
+\begin{itemize}[leftmargin=*]
+    \item \texttt{Requisitos/}: Contiene los requisitos funcionales y de dominio del sistema.
+    \item \texttt{Decisiones/}: Contiene los registros de decisión arquitectónica (ADR) en formato MADR estándar.
+    \item \texttt{Arquitecturas/}: Contiene los modelos UML en formato PlantUML (\texttt{.puml}) y sus exportaciones gráficas (\texttt{.svg}, \texttt{.png}).
+    \item \texttt{docs/}: Contiene la memoria técnica oficial en LaTeX y el documento PDF compilado.
+\end{itemize}
 
 \section{Descripción del trabajo}
 

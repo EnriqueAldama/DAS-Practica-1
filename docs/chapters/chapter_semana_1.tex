@@ -1,3 +1,4 @@
+% !TEX root = ../main.tex
 \chapter{Semana 1: análisis de requisitos y selección del estilo arquitectónico}
 
 Durante la primera semana de la práctica se realizó el análisis de los requisitos funcionales y de dominio del periódico digital y se comenzó a definir su arquitectura software. En esta primera fase se plantearon distintas alternativas para organizar el sistema, comenzando con una propuesta monolítica que posteriormente fue revisada y sustituida por una arquitectura cliente-servidor con API REST.
@@ -32,12 +33,14 @@ La arquitectura seleccionada establece una separación entre el frontend web, en
 
 Según la primera propuesta, los arquitectos junior elaboraron un diagrama UML basado en la arquitectura monolítica.
 
-\begin{figure}[H]
+\begin{landscape}
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{assets/0001-estilo-arquitectonico-monolito-semana1.pdf}
+    \includesvg[width=0.92\linewidth]{assets/0001-estilo-arquitectonico-monolito-semana1.svg}
     \caption{Primera propuesta de arquitectura monolítica.}
     \label{fig:arquitectura-monolitica}
 \end{figure}
+\end{landscape}
 
 Durante la revisión del diagrama se encontraron algunos aspectos que debían corregirse. El primero estaba relacionado con la organización general del sistema. El diagrama representaba la propuesta monolítica inicial, que posteriormente fue anulada tras la discusión entre los arquitectos senior y cognitivos. Además, en esta primera representación se había incorporado un componente de base de datos antes de haber definido cómo debía organizarse el acceso a los datos.
 

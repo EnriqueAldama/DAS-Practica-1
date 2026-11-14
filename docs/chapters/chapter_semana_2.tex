@@ -1,3 +1,4 @@
+% !TEX root = ../main.tex
 \chapter{Semana 2: seguimiento de la arquitectura e incorporación del API Gateway}
 
 Durante la segunda semana se continuó desarrollando la arquitectura a partir del estilo cliente-servidor seleccionado anteriormente.
@@ -32,12 +33,14 @@ Finalmente, se mantuvo la decisión inicial, confirmando que el API Gateway úni
 
 Una vez tomadas las decisiones, los arquitectos junior continuaron trabajando en el diagrama UML para representar los cambios realizados en la arquitectura.
 
-\begin{figure}[H]
+\begin{landscape}
+\begin{figure}[p]
     \centering
-    \includegraphics[width=0.9\textwidth]{assets/0002-estilo-cliente-servidor-rest-semana2.pdf}
+    \includesvg[width=0.94\linewidth]{assets/0002-estilo-cliente-servidor-rest-semana2.svg}
     \caption{Evolución de la arquitectura cliente-servidor con API REST.}
     \label{fig:arquitectura-api-rest-gateway}
 \end{figure}
+\end{landscape}
 
 En este segundo diagrama se representa la separación entre el frontend y el backend, que se comunican mediante HTTP/REST. Además, se incluye el API Gateway.
 
