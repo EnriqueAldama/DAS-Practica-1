@@ -1,0 +1,108 @@
+@startuml 0003-pagos-stripe-y-anonimato-semana3
+
+allowmixing
+
+skinparam packageStyle rectangle
+skinparam shadowing false
+hide empty members
+
+title Diagrama de Clases y Paquetes - Pagos con Stripe y Suscriptores Anonimos (Semana 3)
+
+package "FrontendWeb" as FrontendWeb {
+    class ComponenteResponsivoPC <<boundary>>
+    class ComponenteResponsivoTablet <<boundary>>
+}
+
+package "PkgApiGateway" as PkgApiGateway {
+    component [ApiGateway] as ApiGateway <<gateway>>
+    class DeviceDiscriminator <<controller>>
+}
+
+package "BackendServidor" as BackendServidor {
+
+    package "PkgControladores" as PkgControladores {
+        class NoticiasController <<controller>>
+        class SuscripcionesController <<controller>> {
+            + altaSuscripcion()
+            + bajaSuscripcion()
+        }
+        class FacturacionController <<controller>> {
+            + recibirWebhookStripe()
+        }
+        class EstadisticasController <<controller>>
+    }
+
+    package "PkgNegocio" as PkgNegocio {
+        class ServicioNoticias <<service>>
+        class ServicioSuscripciones <<service>> {
+            + generarToken()
+            + validarToken()
+            + crearSuscripcion()
+            + verificarAccesoSeccion()
+            + cancelarSuscripcion()
+        }
+        class TokenSuscriptor <<service>> {
+            + generarUuidV4()
+            + calcularHashSha256()
+        }
+        class ServicioFacturacion <<service>> {
+            + crearSuscripcionStripe()
+            + procesarWebhookPago()
+        }
+        class ServicioEstadisticas <<service>>
+    }
+
+    package "PkgDatos" as PkgDatos {
+        class AdminRedaccionDAO <<dao>>
+        class SuscriptoresDAO <<dao>>
+        class Suscriptor <<entity>> {
+            tokenHash
+            secciones
+            estado
+            stripeCustomerId
+            stripeSubscriptionId
+        }
+    }
+}
+
+cloud "Servicios Externos" {
+    component [Pasarela Stripe API] as StripeAPI <<external service>>
+}
+
+' Frontend responsivo -> API Gateway
+ComponenteResponsivoPC --> ApiGateway : HTTP/REST \nUser-Agent: PC \nToken de suscriptor
+ComponenteResponsivoTablet --> ApiGateway : HTTP/REST \nUser-Agent: Tablet \nToken de suscriptor
+
+' API Gateway
+ApiGateway --> DeviceDiscriminator : discrimina PC / Tablet (User-Agent)
+ApiGateway --> NoticiasController
+ApiGateway --> SuscripcionesController
+ApiGateway --> FacturacionController
+ApiGateway --> EstadisticasController
+
+' Controladores -> Servicios
+NoticiasController --> ServicioNoticias
+NoticiasController --> ServicioSuscripciones : verificar acceso a noticias de pago
+SuscripcionesController --> ServicioSuscripciones
+FacturacionController --> ServicioFacturacion
+EstadisticasController --> ServicioEstadisticas
+
+' Negocio interno
+ServicioSuscripciones --> TokenSuscriptor : emitir / validar token
+ServicioSuscripciones --> ServicioFacturacion : tramitar cobro de cuota
+
+' Servicios -> DAOs
+ServicioNoticias --> AdminRedaccionDAO
+ServicioEstadisticas --> AdminRedaccionDAO
+
+ServicioSuscripciones --> SuscriptoresDAO
+ServicioFacturacion --> SuscriptoresDAO : actualizar estado de pago
+
+' DAO -> Entidad
+SuscriptoresDAO --> Suscriptor : gestiona
+
+' Facturacion <-> Servicio externo
+ServicioFacturacion ..> StripeAPI : HTTPS / REST (solicitar cobro)
+StripeAPI ..> FacturacionController : HTTPS / REST (notificacion de resultado de pago)
+
+@enduml
