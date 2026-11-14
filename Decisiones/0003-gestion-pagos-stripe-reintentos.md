@@ -1,0 +1,67 @@
+# 0003 - Gestión de Pagos con Stripe Billing, Webhooks y Reintentos
+
+* **Estado:** propuesta
+* **Fecha:** 2026-11-14
+* **Decisores (ASS):** Antonio Machuca, Enrique Aldama
+* **Consultados (ASC):** Sergio González, Sara Guillen
+* **Informados (ASJ):** David Sticea, Elena Romera
+
+## Contexto y Planteamiento del Problema
+El periódico digital ofrece tres modalidades de suscripción de pago: trimestral (70 €), semestral (130 €) y anual (190 €). Los cobros deben realizarse a través de una pasarela externa, que según el catálogo de requisitos debe ser Stripe, y cuando un pago falla el sistema debe permitir reintentarlo hasta tres veces. En la arquitectura vigente (ADR-0001.3 y ADR-0002), el módulo de facturación del backend es el único que se comunica con Stripe mediante el canal HTTP/REST ya establecido, respetando el anonimato de las suscripciones y la segregación de datos (sin almacenar datos de tarjeta en la base de suscriptores, ver ADR-0004).
+
+## Requisitos Motivadores (Decision Drivers)
+* **Requisito(s) Clave:**
+  * **RF5** - Reintentos de pago (Cuando falla un pago, el sistema debe permitir reintentarlo hasta tres veces).
+  * **RF4** - Cobro externalizado (El sistema debe realizar los cobros mediante una pasarela externa).
+  * **RF3** - Modalidades de suscripción (Suscripciones trimestrales, semestrales y anuales con sus importes).
+  * **RD1** - Uso de Stripe (La pasarela de pago utilizada debe ser Stripe).
+
+## Opciones Consideradas
+* **Opción 1:** Stripe Billing (suscripciones recurrentes y reglas de reintento en Stripe) con notificación de resultados mediante Webhooks.
+* **Opción 2:** Cron Job local en el backend que planifica los cobros y reintenta los pagos fallidos invocando la API de Stripe.
+* **Opción 3:** Cola de mensajes (RabbitMQ) en el backend para encolar cobros y reintentos con espera diferida.
+
+## Decisión Adoptada
+Opción elegida: "**Opción 1: Stripe Billing con Webhooks**", porque:
+* Cumple RF4 y RD1 de forma directa: la renovación periódica de cada modalidad la planifica Stripe a partir de los tres importes configurados en la pasarela, de modo que el backend no calcula ni dispara cobros.
+* Cumple RF5: la política de reintentos (máximo 3 tras un fallo) la configura y ejecuta Stripe, y el sistema solo reacciona a los eventos que recibe.
+* Encaja con el estilo Cliente-Servidor REST (RD2): Stripe notifica los resultados mediante HTTP a un endpoint del backend, sin añadir infraestructura nueva (ni planificador ni broker).
+* Mantiene la privacidad: los datos de tarjeta los gestiona exclusivamente Stripe, y el sistema solo almacena identificadores opacos de Stripe vinculados al token anónimo del suscriptor.
+
+### Consecuencias
+* **Positivas:** Se elimina del backend la lógica de planificación de cobros y de temporización de reintentos; el estado del cobro tiene una única fuente de verdad (Stripe); menos componentes que modelar y desplegar; cobros y reintentos continúan aunque el backend esté caído temporalmente.
+* **Negativas:** Dependencia fuerte de Stripe; el endpoint de notificaciones es una superficie de entrada pública que debe autenticar a Stripe y tolerar eventos duplicados o desordenados; el estado local es eventualmente consistente con el de Stripe.
+* **Neutras:** Los ASJ deben modelar la recepción de notificaciones de Stripe como una dependencia en sentido inverso, de Stripe hacia el backend, y reflejar el estado de pago de la suscripción. Esta recepción no discrimina dispositivo (RF1), por lo que no necesita pasar por el API Gateway.
+
+## Pros y Contras de las Opciones Consideradas
+
+### Opción 1: Stripe Billing con Webhooks
+* **A favor (+):** Delega en Stripe el ciclo completo de las tres modalidades (70 €, 130 € y 190 €) y la ejecución de los hasta 3 reintentos (RF5), evitando programar planificadores, contadores de intentos ni bloqueos contra cobros duplicados en `ServicioFacturacion`.
+* **A favor (+):** Mantiene una única fuente de verdad financiera en la pasarela sin almacenar datos de método de pago en `SuscriptoresDAO` (únicamente identificadores opacos y el estado de la suscripción).
+* **En contra (-):** Introduce consistencia eventual con la base de datos local: si el endpoint de webhooks sufre retrasos o caídas, el estado en `SuscriptoresDAO` queda desfasado frente al cobro real, además de exigir verificación criptográfica de firma e idempotencia ante eventos duplicados o desordenados.
+* **En contra (-):** Genera acoplamiento fuerte (*vendor lock-in*) con la lógica de suscripciones de Stripe; sustituir la pasarela en el futuro obligaría a reconstruir toda la gestión de renovaciones en el backend.
+
+### Opción 2: Cron Job local en el backend
+* **A favor (+):** Control directo desde `ServicioFacturacion` sobre el calendario de cobros, los intervalos exactos entre los 3 reintentos y mayor facilidad para cambiar de pasarela de pago en el futuro.
+* **A favor (+):** Actualización síncrona e inmediata del estado de la suscripción en `SuscriptoresDAO` al recibir la respuesta de la API, sin depender de webhooks entrantes ni exponer un endpoint público adicional.
+* **En contra (-):** Obliga a persistir fechas de próximo cobro y contadores de intentos en `SuscriptoresDAO`, y requiere bloqueos de concurrencia para evitar cobros dobles si existen varias instancias del backend ejecutando el planificador a la vez.
+* **En contra (-):** Reimplementa lógica crítica que Stripe ya ofrece de forma nativa (reintentos ante fallos transitorios y control de renovación), aumentando el riesgo de inconsistencias ante caídas del servidor durante el ciclo de facturación.
+
+### Opción 3: Cola de mensajes (RabbitMQ)
+* **A favor (+):** Desacopla los hasta 3 reintentos diferidos de RF5 mediante colas con retardo, evitando bloquear peticiones HTTP del periódico ante fallos temporales de la pasarela.
+* **A favor (+):** Garantiza la persistencia de los intentos pendientes si el servicio de facturación se reinicia en mitad de un reintento.
+* **En contra (-):** Introduce un broker de mensajería desproporcionado para el alcance del sistema (mismo criterio de contención aplicado en ADR-0001.3 al descartar microservicios por eventos).
+* **En contra (-):** Por sí sola no determina cuándo vence cada periodo (trimestral, semestral o anual): sigue necesitando un planificador previo que consulte `SuscriptoresDAO` e inyecte el evento inicial de cobro en la cola.
+
+## Validación y Trazabilidad UML
+* **Modelado ASJ:** David Sticea y Elena Romera deben reflejar esta decisión en `Arquitecturas/`, ampliando el diagrama de la semana 2 con:
+  1. El componente de facturación del backend, que se comunica con la pasarela Stripe en ambos sentidos: peticiones del backend a Stripe y notificaciones de Stripe al backend.
+  2. El estado de pago de la suscripción dentro del almacén de suscriptores.
+* **Notas de Discusión ASS-ASC:**
+  * Pendiente de contraste con Sergio González y Sara Guillen (ASC): debe completarse tras la sesión de revisión con las objeciones planteadas y la respuesta técnica de los ASS. Puntos previstos a discutir: sobreingeniería de los webhooks frente al cron, y gestión de eventos duplicados o desordenados.
+
+## Referencias
+* Stripe, "Billing: Subscriptions overview", [https://docs.stripe.com/billing/subscriptions/overview](https://docs.stripe.com/billing/subscriptions/overview)
+* Stripe, "Automatic retries (Smart Retries) for failed payments", [https://docs.stripe.com/billing/revenue-recovery/smart-retries](https://docs.stripe.com/billing/revenue-recovery/smart-retries)
+* Stripe, "Receive events in your webhook endpoint", [https://docs.stripe.com/webhooks](https://docs.stripe.com/webhooks)
+* Chris Richardson, "Pattern: Idempotent Consumer", [https://microservices.io/patterns/communication-style/idempotent-consumer.html](https://microservices.io/patterns/communication-style/idempotent-consumer.html)

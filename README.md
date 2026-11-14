@@ -35,7 +35,7 @@ El repositorio organiza los elementos del diseno en las siguientes carpetas:
 
 ### 2. Registro de Decisiones Arquitectonicas (MADR)
 * **[ADR-0001.1: Seleccion Inicial de Estilo Arquitectonico Global](Decisiones/0001.1-seleccion-estilo-arquitectonico-global.md)**
-  * *Requisito Clave:* RF2 (Estructuracion en 5 secciones y modelo modular inicial).
+  * *Requisito Clave:* RD3 (Estructuracion inicial de capas y persistencia sobre PostgreSQL 19).
   * *Decision Inicial:* Monolito en capas MVC con renderizado en servidor.
   * *Estado:* Anulada formalmente en ADR-0001.2.
 * **[ADR-0001.2: Anulacion de la Decision 0001.1](Decisiones/0001.2-anulacion-decision-0001.1.md)**
