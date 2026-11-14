@@ -1,1 +1,12 @@
 .DS_Store
+
+# LaTeX build artifacts
+docs/*.aux
+docs/*.log
+docs/*.toc
+docs/*.lof
+docs/*.lot
+docs/*.out
+docs/*.synctex.gz
+docs/*.fls
+docs/*.fdb_latexmk
