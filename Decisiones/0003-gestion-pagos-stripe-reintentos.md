@@ -58,7 +58,11 @@ Opción elegida: "**Opción 1: Stripe Billing con Webhooks**", porque:
   1. El componente de facturación del backend, que se comunica con la pasarela Stripe en ambos sentidos: peticiones del backend a Stripe y notificaciones de Stripe al backend.
   2. El estado de pago de la suscripción dentro del almacén de suscriptores.
 * **Notas de Discusión ASS-ASC:**
-  * Pendiente de contraste con Sergio González y Sara Guillen (ASC): debe completarse tras la sesión de revisión con las objeciones planteadas y la respuesta técnica de los ASS. Puntos previstos a discutir: sobreingeniería de los webhooks frente al cron, y gestión de eventos duplicados o desordenados.
+  * Pendiente de contraste con Sergio González y Sara Guillen (ASC): debe completarse tras la sesión de revisión con las objeciones planteadas y la respuesta técnica de los ASS. Puntos previstos a discutir: sobreingeniería de los webhooks frente al cron y gestión de eventos duplicados o desordenados.
+  * En la revisión, Sergio González (ASC) planteó si hacía falta utilizar webhooks o si el backend podía encargarse de los cobros y los reintentos mediante una tarea programada. Así se evitaría añadir un endpoint para recibir notificaciones de Stripe.
+  * Sara Guillén (ASC) comentó que los webhooks podían llegar repetidos o en un orden distinto al esperado y que eso podía hacer que el estado guardado en la base de datos no coincidiera con el de Stripe.
+  * Antonio Machuca y Enrique Aldama (ASS) explicaron que, con una tarea programada, el backend tendría que controlar los vencimientos y los reintentos. Con Stripe Billing esa parte queda en Stripe y los webhooks sirven para comunicar al sistema cómo ha terminado cada pago. También señalaron que habría que comprobar las notificaciones y evitar procesar un mismo evento más de una vez.
+  * Después de comparar ambas opciones el equipo decidió mantener Stripe Billing con webhooks. Se consideró que era la opción más adecuada para gestionar los cobros periódicos, siempre que el backend controle correctamente las notificaciones recibidas.
 
 ## Referencias
 * Stripe, "Billing: Subscriptions overview", [https://docs.stripe.com/billing/subscriptions/overview](https://docs.stripe.com/billing/subscriptions/overview)
