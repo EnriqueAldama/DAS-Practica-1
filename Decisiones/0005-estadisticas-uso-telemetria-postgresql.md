@@ -58,4 +58,3 @@ Opción elegida: "**Opción 1: Patrones `Observer` y `Facade` sobre PostgreSQL 1
 * Erich Gamma et al., *Design Patterns: Elements of Reusable Object-Oriented Software* (Patrones `Observer` y `Facade`).
 * Refactoring Guru, "Observer Pattern", [https://refactoring.guru/design-patterns/observer](https://refactoring.guru/design-patterns/observer)
 * Refactoring Guru, "Facade Pattern", [https://refactoring.guru/design-patterns/facade](https://refactoring.guru/design-patterns/facade)
-* Apuntes de Diseño y Arquitectura del Software (DAS), Tema 2: *Estilos y Patrones de Diseño Software* (`Observer` frente a `Publish-Subscribe` y `Facade`).
