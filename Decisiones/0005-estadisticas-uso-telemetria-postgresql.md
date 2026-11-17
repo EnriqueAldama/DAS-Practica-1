@@ -1,64 +1,61 @@
-# 0005 - Captura y Almacenamiento de Estadísticas de Uso mediante Telemetría Propia en PostgreSQL 19
+# 0005 - Diseño del Subsistema de Estadísticas de Uso mediante Patrones Observer y Facade
 
 * **Estado:** propuesta
-* **Fecha:** 2026-11-16
+* **Fecha:** 2026-11-17
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
 * **Consultados (ASC):** Sergio González, Sara Guillen
 * **Informados (ASJ):** David Sticea, Elena Romera
 
 ## Contexto y Planteamiento del Problema
-Los administradores y redactores necesitan consultar estadísticas de uso del periódico: noticias más leídas, tiempo de permanencia, tasas de rebote y conversiones a suscriptores. El sistema ya usa una arquitectura Cliente-Servidor REST (ADR-0001.3), un `ApiGateway` que distingue PC y Tablet mediante `X-Device-Type` (ADR-0002.1), suscripciones anónimas sin datos personales (ADR-0004) y dos bases de datos PostgreSQL 19 (una para administración/redacción y otra para suscriptores). Hay que decidir cómo recoger y guardar estas métricas sin añadir infraestructura innecesaria ni romper el anonimato.
+Los administradores y redactores deben consultar cuatro métricas de uso: noticias más leídas, tiempo de permanencia, tasas de rebote y conversiones a suscriptores. La arquitectura vigente sigue el estilo Cliente-Servidor REST (ADR-0001.3), incorpora un `ApiGateway` que distingue PC y Tablet mediante `X-Device-Type` (ADR-0002.1), mantiene suscripciones anónimas (ADR-0004) y separa los datos en dos bases PostgreSQL 19: una para administración/redacción y otra para suscriptores. Es necesario decidir la arquitectura y los patrones de diseño para capturar y consultar estas métricas sin acoplar la lógica de negocio, sin romper el anonimato y sin añadir infraestructura innecesaria.
 
 ## Requisitos Motivadores (Decision Drivers)
 * **Requisito Clave:** RF6 - Estadísticas de uso (Los administradores y redactores pueden consultar las noticias más leídas, el tiempo de permanencia, las tasas de rebote y las conversiones a suscriptores).
 
 ## Opciones Consideradas
-* **Opción 1:** Telemetría propia desde `FrontendWeb` al backend REST, guardando las métricas en la base PostgreSQL 19 de administración y redacción (`AdminRedaccionDAO`).
-* **Opción 2:** Herramienta externa de analítica web (Google Analytics o Matomo SaaS) en `FrontendWeb`.
-* **Opción 3:** Pipeline de eventos con broker de mensajería (Kafka) y base analítica separada (ClickHouse).
+* **Opción 1:** Patrón `Observer` en memoria local junto con una `Facade` analítica (`ServicioEstadisticas`) sobre la base PostgreSQL 19 de administración y redacción (`AdminRedaccionDAO`).
+* **Opción 2:** Patrón `Publish-Subscribe` (Pub-Sub) mediante broker de mensajería en red y almacén analítico separado.
+* **Opción 3:** Delegación en plataforma de analítica externa integrada mediante el patrón `Adapter`.
 
 ## Decisión Adoptada
-Opción elegida: "**Opción 1: Telemetría propia en PostgreSQL 19 (`AdminRedaccionDAO`)**", porque:
-* Cumple RF6 usando los componentes que ya existen (`EstadisticasController`, `ServicioEstadisticas` y `AdminRedaccionDAO`), sin añadir servidores ni bases de datos nuevas.
-* Cubre las cuatro métricas de forma sencilla:
-  1. **Noticias más leídas y rebote:** eventos de lectura enviados desde `FrontendWeb` con un ID de sesión temporal del navegador (sin cookies ni datos personales).
-  2. **Tiempo de permanencia:** envío ligero con `Navigator.sendBeacon()` al cerrar o cambiar de pestaña.
-  3. **Conversiones a suscriptores:** aviso interno de `ServicioSuscripciones` a `ServicioEstadisticas` cuando se confirma un alta (ADR-0003 y ADR-0004).
-* Usa la cabecera `X-Device-Type` del `ApiGateway` para separar los datos entre PC y Tablet.
-* Guarda todo en la base PostgreSQL 19 de administración y redacción, sin mezclar ni guardar `tokenHash` ni datos de suscriptores.
+Opción elegida: "**Opción 1: Patrones `Observer` y `Facade` sobre PostgreSQL 19 (`AdminRedaccionDAO`)**", porque:
+* **Desacopla el dominio mediante `Observer`:** `ServicioNoticias` (eventos de lectura, permanencia y rebote) y `ServicioSuscripciones` (altas confirmadas) actúan como sujetos observados (*Subjects*). Al cambiar su estado, notifican en memoria local a `ServicioEstadisticas` (`Observer`) sin depender de cómo se calculan o almacenan las métricas.
+* **Simplifica la consulta mediante `Facade`:** `ServicioEstadisticas` expone una interfaz única y de alto nivel (`Facade`) hacia `EstadisticasController` para consultar las cuatro métricas agregadas, ocultando la lógica interna de agregación.
+* **Evita infraestructura distribuida:** Como el backend reside en un único servidor (`BackendServidor`), la comunicación en memoria de `Observer` resuelve RF6 sin introducir un intermediario de red (*broker*).
+* **Preserva la separación de datos y el anonimato:** Toda la analítica se guarda únicamente en `AdminRedaccionDAO` segmentada por `X-Device-Type`, sin acceder a `SuscriptoresDAO` ni almacenar identificadores de suscriptor (`tokenHash`).
 
 ### Consecuencias
-* **Positivas:** Control total de los datos en PostgreSQL 19; no le afectan los bloqueadores de anuncios; las conversiones solo se cuentan cuando el pago se confirma en el backend; coste mínimo.
-* **Negativas:** Genera más escrituras en la base de administración y redacción cuando hay muchos lectores; obliga a programar la captura en `FrontendWeb` y el cálculo en `ServicioEstadisticas`.
-* **Neutras:** Los ASJ deben añadir las operaciones de estadísticas y la relación `ServicioSuscripciones --> ServicioEstadisticas` en `Arquitecturas/`.
+* **Positivas:** Bajo acoplamiento entre negocio y analítica; reutiliza el servidor y las dos bases PostgreSQL 19 existentes; control total de lecturas y conversiones reales sin depender de terceros.
+* **Negativas:** Las notificaciones en memoria comparten proceso y carga de escritura con la base PostgreSQL 19 de administración y redacción; si el sistema escalara a múltiples servicios independientes, habría que sustituir `Observer` por `Publish-Subscribe`.
+* **Neutras:** Los ASJ deben modelar en `Arquitecturas/` la interfaz observadora, el rol de fachada en `ServicioEstadisticas` y los eventos anónimos de uso en `PkgDatos`.
 
 ## Pros y Contras de las Opciones Consideradas
 
-### Opción 1: Telemetría propia en PostgreSQL 19 (`AdminRedaccionDAO`)
-* **A favor (+):** Aprovecha los componentes actuales (`EstadisticasController`, `ServicioEstadisticas`, `AdminRedaccionDAO`) sin infraestructura nueva.
-* **A favor (+):** No falla por bloqueadores de rastreo y registra conversiones reales desde el backend manteniendo el anonimato.
-* **En contra (-):** Añade escrituras a PostgreSQL 19 en picos de tráfico y obliga a mantener la lógica de agregación propia.
+### Opción 1: Patrones `Observer` y `Facade` sobre PostgreSQL 19 (`AdminRedaccionDAO`)
+* **A favor (+):** Desacopla `ServicioNoticias` y `ServicioSuscripciones` del subsistema analítico sin añadir un broker externo ni una tercera base de datos.
+* **A favor (+):** Centraliza en una fachada (`ServicioEstadisticas`) las cuatro métricas requeridas por RF6 y mantiene el aislamiento total frente a `SuscriptoresDAO`.
+* **En contra (-):** Comparte el almacén de administración/redacción en picos de lectura y limita el alcance de la notificación al proceso local del servidor.
 
-### Opción 2: Herramienta externa de analítica web (Google Analytics / Matomo SaaS)
-* **A favor (+):** Trae ya hechos el cálculo de permanencia, rebote y paneles gráficos sin programar nada en el backend.
-* **En contra (-):** Los bloqueadores del navegador cortan sus peticiones y falsean las cifras de lectura y conversión.
-* **En contra (-):** Dificulta cuadrar las conversiones confirmadas por Stripe en el backend y envía datos de uso a terceros.
+### Opción 2: Patrón `Publish-Subscribe` con broker de mensajería en red
+* **A favor (+):** Logra desacoplamiento espacial y temporal total entre emisores y consumidores, absorbiendo grandes picos de eventos.
+* **En contra (-):** Introduce un middleware de mensajería (MOM) y complejidad distribuida injustificada para un único servidor de aplicaciones.
+* **En contra (-):** Requiere infraestructura adicional fuera de las dos bases PostgreSQL 19 definidas en el caso de estudio.
 
-### Opción 3: Pipeline de eventos con Kafka y ClickHouse
-* **A favor (+):** Soporta mucho volumen de eventos sin cargar la base PostgreSQL 19.
-* **En contra (-):** Añade demasiada complejidad y dos sistemas nuevos innecesarios para el tamaño del periódico.
-* **En contra (-):** Incumple la restricción de usar únicamente las dos bases de datos PostgreSQL 19 del sistema.
+### Opción 3: Analítica externa integrada mediante patrón `Adapter`
+* **A favor (+):** Evita diseñar y mantener dentro del backend propio la lógica de cálculo de permanencia, rebote y agregación de métricas.
+* **En contra (-):** Expone datos de navegación a un proveedor externo y pierde precisión por bloqueadores de rastreo en el cliente.
+* **En contra (-):** Dificulta correlacionar las conversiones reales confirmadas en el backend con la lectura previa de noticias.
 
 ## Validación y Trazabilidad UML
-* **Modelado ASJ:** David Sticea y Elena Romera deben reflejar en `Arquitecturas/`:
-  1. En `EstadisticasController` (o `EstadisticasRestController`): `registrarEventoUso()` y `consultarEstadisticas()`.
-  2. En `ServicioEstadisticas`: `procesarEvento()`, `registrarConversion()` y `obtenerMetricas()`.
-  3. Dependencia `ServicioSuscripciones --> ServicioEstadisticas : notificar conversion`.
-  4. Persistencia únicamente a través de `ServicioEstadisticas --> AdminRedaccionDAO`, sin acceso a `SuscriptoresDAO`.
+* **Modelado ASJ:** David Sticea y Elena Romera deben reflejar esta decisión en `Arquitecturas/`:
+  1. Definir la interfaz `ObservadorEstadisticas` (`<<interface>>`) implementada por `ServicioEstadisticas`, y las relaciones de notificación desde `ServicioNoticias` y `ServicioSuscripciones` (`Subjects` → `Observer`).
+  2. Modelar `ServicioEstadisticas` como `Facade` entre `EstadisticasController`/`EstadisticasRestController` (`registrarEventoUso()`, `consultarEstadisticas()`) y la persistencia en `AdminRedaccionDAO`.
+  3. Añadir la entidad anónima `EventoUso` en `AdminRedaccionDAO` (tipo de métrica, dispositivo `X-Device-Type`, duración), sin ninguna relación con `SuscriptoresDAO` ni `Suscriptor`.
 * **Notas de Discusión ASS-ASC:**
-  * *Pendiente de contraste con Sergio González y Sara Guillen (ASC):* Completar tras la revisión. Puntos a tratar: carga de escrituras en PostgreSQL 19 frente a agrupar eventos en memoria, y cómo definir la sesión temporal del rebote sin perder anonimato.
+  * *Pendiente de contraste con Sergio González y Sara Guillen (ASC):* Completar tras la sesión de revisión. Puntos previstos: justificación de `Observer` en memoria frente a `Publish-Subscribe`, y riesgo de carga de escritura sobre PostgreSQL 19 de administración y redacción.
 
 ## Referencias
-* MDN Web Docs, "Navigator: sendBeacon() method", [https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon)
-* MDN Web Docs, "Page Visibility API (`visibilitychange`)", [https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API)
-* PostgreSQL Global Development Group, "Materialized Views", [https://www.postgresql.org/docs/current/rules-materializedviews.html](https://www.postgresql.org/docs/current/rules-materializedviews.html)
+* Erich Gamma et al., *Design Patterns: Elements of Reusable Object-Oriented Software* (Patrones `Observer` y `Facade`).
+* Refactoring Guru, "Observer Pattern", [https://refactoring.guru/design-patterns/observer](https://refactoring.guru/design-patterns/observer)
+* Refactoring Guru, "Facade Pattern", [https://refactoring.guru/design-patterns/facade](https://refactoring.guru/design-patterns/facade)
+* Apuntes de Diseño y Arquitectura del Software (DAS), Tema 2: *Estilos y Patrones de Diseño Software* (`Observer` frente a `Publish-Subscribe` y `Facade`).
