@@ -24,8 +24,8 @@ Desde el punto de vista del diseño arquitectónico, el problema consiste en:
 
 ## Decisión Adoptada
 Elegimos la **Opción 1: Patrón Publish-Subscribe distribuido por categorías con Proxy de Protección (*Protection Proxy*)**, porque:
-* Aplica el **Patrón Publish-Subscribe** (Tema 2, Diapositiva 38) tratando las 5 secciones de noticias como canales temáticos independientes (*topics*). Los redactores publican en los canales y los lectores anónimos consumen de ellos, logrando un desacoplamiento estructural completo (*loosely coupling*).
-* Incorpora un **Patrón Proxy de Protección** (Tema 2, Diapositiva 34) como intermediario ante el servicio de noticias. El proxy intercepta las solicitudes de lectura, comprueba la validez del identificador opaco de suscripción contra el repositorio y autoriza el acceso a la categoría correspondiente sin requerir datos personales.
+* Aplica el **Patrón Publish-Subscribe** tratando las 5 secciones de noticias como canales temáticos independientes (*topics*). Los redactores publican en los canales y los lectores anónimos consumen de ellos, logrando un desacoplamiento estructural completo (*loosely coupling*).
+* Incorpora un **Patrón Proxy de Protección** como intermediario ante el servicio de noticias. El proxy intercepta las solicitudes de lectura, comprueba la validez del identificador opaco de suscripción contra el repositorio y autoriza el acceso a la categoría correspondiente sin requerir datos personales.
 * Facilita el proceso de baja: darse de baja consiste simplemente en revocar la vinculación del identificador anónimo respecto al canal temático en el proxy, sin necesidad de procesos complejos de borrado de cuentas de usuario.
 
 ### Consecuencias
@@ -36,13 +36,13 @@ Elegimos la **Opción 1: Patrón Publish-Subscribe distribuido por categorías c
 ## Pros y Contras de las Opciones Consideradas
 
 ### Opción 1: Publish-Subscribe con Proxy de Protección
-* **A favor (+):** Diseñado específicamente para sistemas de suscripción de noticias con alta concurrencia (Tema 2, Diapositiva 38), asegurando escalabilidad y bajo acoplamiento.
+* **A favor (+):** Diseñado específicamente para sistemas de suscripción de noticias con alta concurrencia, asegurando escalabilidad y bajo acoplamiento.
 * **A favor (+):** El Proxy de Protección aísla el servicio de noticias (`ServicioNoticias`) de la lógica de verificación de derechos, cumpliendo el principio de responsabilidad única.
 * **A favor (+):** Preserva el anonimato absoluto: el canal temático solo conoce identificadores de suscripción, nunca personas físicas.
 * **En contra (-):** Mayor número de componentes abstractos a modelar en el diagrama de clases en comparación con una llamada directa.
 
 ### Opción 2: Patrón Mediator centralizado con sesiones activas
-* **A favor (+):** Centraliza la orquestación de mensajes y usuarios en un único componente mediador (Tema 2, Diapositiva 39).
+* **A favor (+):** Centraliza la orquestación de mensajes y usuarios en un único componente mediador.
 * **En contra (-):** Rompe el principio de diseño *stateless* de la arquitectura REST al forzar el mantenimiento de un registro de sesiones activas en el servidor.
 * **En contra (-):** El mediador se convierte en un cuello de botella arquitectónico al concentrar la publicación de noticias, las altas/bajas y la validación de credenciales.
 
