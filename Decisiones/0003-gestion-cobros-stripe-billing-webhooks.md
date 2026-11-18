@@ -1,6 +1,6 @@
 # 0003 - Gestión de Cobros con Stripe Billing, Webhooks y Patrones Adapter y Observer
 
-* **Estado:** propuesta
+* **Estado:** aceptada
 * **Fecha:** 2026-11-14
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
 * **Consultados (ASC):** Sergio González, Sara Guillen

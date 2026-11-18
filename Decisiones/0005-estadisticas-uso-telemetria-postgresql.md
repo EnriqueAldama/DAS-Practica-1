@@ -1,6 +1,6 @@
 # 0005 - Diseño del Subsistema de Estadísticas de Uso mediante Patrones Observer y Facade
 
-* **Estado:** propuesta
+* **Estado:** aceptada
 * **Fecha:** 2026-11-17
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
 * **Consultados (ASC):** Sergio González, Sara Guillen
@@ -52,7 +52,6 @@ Opción elegida: "**Opción 1: Patrones `Observer` y `Facade` sobre PostgreSQL 1
   2. Modelar `ServicioEstadisticas` como `Facade` entre `EstadisticasController`/`EstadisticasRestController` (`registrarEventoUso()`, `consultarEstadisticas()`) y la persistencia en `AdminRedaccionDAO`.
   3. Añadir la entidad anónima `EventoUso` en `AdminRedaccionDAO` (tipo de métrica, dispositivo `X-Device-Type`, duración), sin ninguna relación con `SuscriptoresDAO` ni `Suscriptor`.
 * **Notas de Discusión ASS-ASC:**
-  * *Pendiente de contraste con Sergio González y Sara Guillen (ASC):* Completar tras la sesión de revisión. Puntos previstos: justificación de `Observer` en memoria frente a `Publish-Subscribe` y riesgo de carga de escritura sobre PostgreSQL 19 de administración y redacción.
   * *Aceptada tras la revisión de los arquitectos cognitivos.*
  * Durante la revisión, Sergio González (ASC) preguntó si era necesario usar Publish-Subscribe o si Observer era suficiente. También señaló que Observer limita las notificaciones al backend. Sara Guillén (ASC) planteó si guardar los eventos podía generar demasiada carga en PostgreSQL 19 y cómo contar las conversiones sin identificar a los suscriptores.
   * Antonio Machuca y Enrique Aldama (ASS) explicaron que ahora no se necesita añadir un intermediario. Las conversiones se pueden registrar como eventos anónimos sin guardar el token del suscriptor.
