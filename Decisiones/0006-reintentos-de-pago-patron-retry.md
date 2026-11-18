@@ -51,9 +51,8 @@ Opción elegida: "**Opción 1: Patrón `Retry` con la política delegada en Stri
 
 ## Validación y Trazabilidad UML
 * **Modelado ASJ:** David Sticea y Elena Romera deben reflejar esta decisión en `Arquitecturas/`:
-  1. Mostrar en un diagrama de secuencia el flujo de reintento: fallo de pago en Stripe, hasta tres reintentos y notificación final por webhook.
-  2. Mostrar que `ServicioSuscripciones`, como observador del `WebhookController` (ADR-0003), actualiza la situación de pago de la suscripción (al corriente, pago fallido o suspendida).
-  3. Incluir la situación de pago de la suscripción en el almacén de suscriptores, sin datos de tarjeta.
+  1. Mostrar que `ServicioSuscripciones`, como observador del `WebhookController` (ADR-0003), actualiza la situación de pago de la suscripción (al corriente, pago fallido o suspendida).
+  2. Incluir la situación de pago de la suscripción en el almacén de suscriptores, sin datos de tarjeta.
 * **Notas de Discusión ASS-ASC:**
   * Pendiente de contraste con Sergio González y Sara Guillen (ASC): completar tras la sesión de revisión. Puntos previstos: dependencia de los reintentos de Stripe frente a un control propio, y coherencia de la situación local ante eventos duplicados o desordenados.
 
