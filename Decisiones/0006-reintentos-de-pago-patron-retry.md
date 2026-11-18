@@ -1,6 +1,6 @@
 # 0006 - Reintentos de Pago Fallido mediante Patrón Retry
 
-* **Estado:** propuesta
+* **Estado:** aceptada
 * **Fecha:** 2026-11-17
 * **Decisores (ASS):** Antonio Machuca, Enrique Aldama
 * **Consultados (ASC):** Sergio González, Sara Guillen
