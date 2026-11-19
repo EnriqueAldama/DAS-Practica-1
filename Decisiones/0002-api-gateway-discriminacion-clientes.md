@@ -1,4 +1,4 @@
-# 0002.1 - Incorporación de API Gateway para Discriminación de Clientes (PC y Tablet)
+# 0002 - Incorporación de API Gateway para Discriminación de Clientes (PC y Tablet)
 
 * **Estado:** aceptada
 * **Fecha:** 2026-11-10

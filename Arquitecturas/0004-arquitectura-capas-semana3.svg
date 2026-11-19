@@ -1,0 +1,397 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2956" height="1526" viewBox="-28.0 12.0 2956.0 1526.0">
+<rect x="-28.0" y="12.0" width="2956.0" height="1526.0" fill="#FFFFFF"/>
+<defs>
+  <style>
+    text { font-family: Arial, Helvetica, sans-serif; fill: #222222; }
+  </style>
+</defs>
+<rect x="430" y="40" width="141.0" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="430" y="60" width="1980" height="1235" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="1420.0" y="71.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«lógica de negocio»</text>
+<text x="1420.0" y="86.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">BackendServidor</text>
+<rect x="930" y="510" width="187.8" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="930" y="530" width="720" height="700" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="1290.0" y="543.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgSuscripcionesPagos</text>
+<rect x="1720" y="110" width="109.8" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="1720" y="130" width="660" height="580" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="2050.0" y="143.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgNoticias</text>
+<rect x="1720" y="760" width="141.0" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="1720" y="780" width="660" height="490" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="2050.0" y="793.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgEstadisticas</text>
+<rect x="460" y="510" width="148.8" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="460" y="530" width="400" height="700" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="660.0" y="543.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgControladores</text>
+<rect x="930" y="110" width="117.6" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="930" y="130" width="480" height="330" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="1170.0" y="141.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«seguridad»</text>
+<text x="1170.0" y="156.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgSeguridad</text>
+<rect x="460" y="110" width="125.4" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="460" y="130" width="400" height="330" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="660.0" y="141.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«comunicación»</text>
+<text x="660.0" y="156.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgApiGateway</text>
+<rect x="2480" y="250" width="90.0" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="2480" y="270" width="420" height="210" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="2690.0" y="281.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«acceso a datos»</text>
+<text x="2690.0" y="296.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgDatos</text>
+<rect x="664" y="1360" width="141.0" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="664" y="1380" width="360" height="130" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="844.0" y="1393.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PkgPasarelaPago</text>
+<rect x="0" y="168" width="181.5" height="20" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<rect x="0" y="188" width="330" height="94" fill="#FFFFFF" stroke="#444444" stroke-width="1.3"/>
+<text x="165.0" y="201.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">Cliente (FrontendWeb)</text>
+<rect x="480" y="165" width="360" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<rect x="818" y="171" width="14" height="16" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<rect x="814" y="174" width="8" height="4" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<rect x="814" y="180" width="8" height="4" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<text x="660.0" y="183.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">ApiGateway</text>
+<rect x="480" y="325" width="360" height="110" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="660.0" y="343.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">DeviceDiscriminator</text>
+<line x1="480" y1="350" x2="840" y2="350" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="366.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-userAgent: String</text>
+<text x="493.0" y="381.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tipoDispositivo: String</text>
+<line x1="480" y1="388" x2="840" y2="388" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="404.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+discriminar(userAgent: String): String</text>
+<text x="493.0" y="419.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+añadirCabecera(peticion): String</text>
+<rect x="480" y="560" width="360" height="105" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="660.0" y="578.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">NoticiasController</text>
+<line x1="480" y1="585" x2="840" y2="585" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="601.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-accesoNoticias: NoticiasProtectionProxy</text>
+<line x1="480" y1="608" x2="840" y2="608" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="624.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+leerNoticia(categoria: String, idSuscripcion: String)</text>
+<text x="493.0" y="639.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+publicarNoticia(noticia: Noticia)</text>
+<rect x="480" y="685" width="367.32861328125" height="95" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="663.7" y="703.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">SuscripcionesController</text>
+<line x1="480" y1="710" x2="847.32861328125" y2="710" stroke="#333333" stroke-width="1.0"/>
+<line x1="480" y1="720" x2="847.32861328125" y2="720" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="736.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+altaSuscripcion(categorias: String[], modalidad: String)</text>
+<text x="493.0" y="751.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+bajaSuscripcion(idSuscripcion: String, categoria: String)</text>
+<rect x="480" y="800" width="360" height="95" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="660.0" y="818.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">EstadisticasController</text>
+<line x1="480" y1="825" x2="840" y2="825" stroke="#333333" stroke-width="1.0"/>
+<line x1="480" y1="835" x2="840" y2="835" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="851.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+registrarEventoUso(evento: EventoUso)</text>
+<text x="493.0" y="866.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+consultarEstadisticas(): Metricas</text>
+<rect x="480" y="915" width="360" height="140" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="660.0" y="931.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«Subject»</text>
+<text x="660.0" y="946.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">WebhookController</text>
+<line x1="480" y1="953" x2="840" y2="953" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="969.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-observadores: ServicioSuscripciones[]</text>
+<line x1="480" y1="976" x2="840" y2="976" stroke="#333333" stroke-width="1.0"/>
+<text x="493.0" y="992.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+recibirWebhookStripe(evento: EventoStripe)</text>
+<text x="493.0" y="1007.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+suscribir(observador: ServicioSuscripciones)</text>
+<text x="493.0" y="1022.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+notificar(evento: EventoStripe)</text>
+<text x="493.0" y="1037.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-verificarFirmaStripe(evento: EventoStripe): boolean</text>
+<rect x="950" y="165" width="440" height="130" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1170.0" y="181.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«Protection Proxy»</text>
+<text x="1170.0" y="196.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">NoticiasProtectionProxy</text>
+<line x1="950" y1="203" x2="1390" y2="203" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="219.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-servicioReal: NoticiasServiceImpl</text>
+<line x1="950" y1="226" x2="1390" y2="226" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="242.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+leerNoticia(categoria: String, idSuscripcion: String)</text>
+<text x="963.0" y="257.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+publicarNoticia(noticia: Noticia)</text>
+<text x="963.0" y="272.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-verificarAcceso(idSuscripcion: String, categoria: String): boolean</text>
+<rect x="950" y="555" width="440" height="140" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1170.0" y="571.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«Observer, Subject»</text>
+<text x="1170.0" y="586.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">ServicioSuscripciones</text>
+<line x1="950" y1="593" x2="1390" y2="593" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="609.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-observadores: ObservadorEstadisticas[]</text>
+<line x1="950" y1="616" x2="1390" y2="616" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="632.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+crearSuscripcion(categorias: String[], modalidad: String): String</text>
+<text x="963.0" y="647.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+cancelarSuscripcion(idSuscripcion: String, categoria: String)</text>
+<text x="963.0" y="662.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+actualizar(eventoPago: EventoStripe)</text>
+<text x="963.0" y="677.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-notificarEvento(evento: EventoUso)</text>
+<rect x="950" y="720" width="440" height="90" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1170.0" y="738.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">ServicioFacturacion</text>
+<line x1="950" y1="745" x2="1390" y2="745" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="761.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-pasarela: PasarelaPago</text>
+<text x="963.0" y="776.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-modalidad: String</text>
+<line x1="950" y1="783" x2="1390" y2="783" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="799.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+contratarModalidad(idSuscripcion: String, modalidad: String)</text>
+<rect x="950" y="985" width="440" height="95" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1170.0" y="1001.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«interface»</text>
+<text x="1170.0" y="1016.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">PasarelaPago</text>
+<line x1="950" y1="1023" x2="1390" y2="1023" stroke="#333333" stroke-width="1.0"/>
+<line x1="950" y1="1033" x2="1390" y2="1033" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="1049.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+crearSuscripcionRecurrente(modalidad: String, importe: double)</text>
+<text x="963.0" y="1064.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+cancelarSuscripcionRecurrente(idSuscripcionStripe: String)</text>
+<rect x="950" y="1110" width="440" height="100" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1170.0" y="1126.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«Adapter, Retry»</text>
+<text x="1170.0" y="1141.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">StripeAdapter</text>
+<line x1="950" y1="1148" x2="1390" y2="1148" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="1164.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-maxReintentos: int = 3</text>
+<line x1="950" y1="1171" x2="1390" y2="1171" stroke="#333333" stroke-width="1.0"/>
+<text x="963.0" y="1187.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+crearSuscripcionRecurrente(modalidad: String, importe: double)</text>
+<text x="963.0" y="1202.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+cancelarSuscripcionRecurrente(idSuscripcionStripe: String)</text>
+<rect x="1740" y="165" width="380" height="95" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1930.0" y="181.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«interface»</text>
+<text x="1930.0" y="196.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">INoticiasService</text>
+<line x1="1740" y1="203" x2="2120" y2="203" stroke="#333333" stroke-width="1.0"/>
+<line x1="1740" y1="213" x2="2120" y2="213" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="229.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+leerNoticia(categoria: String, idSuscripcion: String)</text>
+<text x="1753.0" y="244.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+publicarNoticia(noticia: Noticia)</text>
+<rect x="1740" y="305" width="380" height="130" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1930.0" y="321.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«Subject»</text>
+<text x="1930.0" y="336.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">NoticiasServiceImpl</text>
+<line x1="1740" y1="343" x2="2120" y2="343" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="359.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-observadores: ObservadorEstadisticas[]</text>
+<line x1="1740" y1="366" x2="2120" y2="366" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="382.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+leerNoticia(categoria: String, idSuscripcion: String)</text>
+<text x="1753.0" y="397.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+publicarNoticia(noticia: Noticia)</text>
+<text x="1753.0" y="412.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-notificarEvento(evento: EventoUso)</text>
+<rect x="1740" y="485" width="310" height="135" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1895.0" y="503.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">CanalTematico</text>
+<line x1="1740" y1="510" x2="2050" y2="510" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="526.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-categoria: String</text>
+<text x="1753.0" y="541.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-suscritos: String[]</text>
+<line x1="1740" y1="548" x2="2050" y2="548" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="564.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+publicar(noticia: Noticia)</text>
+<text x="1753.0" y="579.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+suscribir(idSuscripcion: String)</text>
+<text x="1753.0" y="594.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+darDeBaja(idSuscripcion: String)</text>
+<rect x="1740" y="810" width="370" height="85" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1925.0" y="826.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«interface»</text>
+<text x="1925.0" y="841.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">ObservadorEstadisticas</text>
+<line x1="1740" y1="848" x2="2110" y2="848" stroke="#333333" stroke-width="1.0"/>
+<line x1="1740" y1="858" x2="2110" y2="858" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="874.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+actualizar(evento: EventoUso)</text>
+<rect x="1740" y="940" width="370" height="195" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1925.0" y="956.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="middle" fill="#222222">«Facade»</text>
+<text x="1925.0" y="971.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">ServicioEstadisticas</text>
+<line x1="1740" y1="978" x2="2110" y2="978" stroke="#333333" stroke-width="1.0"/>
+<line x1="1740" y1="988" x2="2110" y2="988" stroke="#333333" stroke-width="1.0"/>
+<text x="1753.0" y="1004.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+actualizar(evento: EventoUso)</text>
+<text x="1753.0" y="1019.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+registrarEventoUso(evento: EventoUso)</text>
+<text x="1753.0" y="1034.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">+consultarEstadisticas(): Metricas</text>
+<text x="1753.0" y="1049.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-calcularMasLeidas()</text>
+<text x="1753.0" y="1064.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-calcularPermanencia()</text>
+<text x="1753.0" y="1079.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-calcularTasaRebote()</text>
+<text x="1753.0" y="1094.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-calcularConversiones()</text>
+<rect x="2500" y="305" width="380" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<rect x="2858" y="311" width="14" height="16" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<rect x="2854" y="314" width="8" height="4" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<rect x="2854" y="320" width="8" height="4" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<text x="2690.0" y="323.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">libpq</text>
+<rect x="680" y="1408" width="320" height="80" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<rect x="978" y="1414" width="14" height="16" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<rect x="974" y="1417" width="8" height="4" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<rect x="974" y="1423" width="8" height="4" fill="#FFFFFF" stroke="#333333" stroke-width="1.1"/>
+<text x="840.0" y="1426.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">stripe-node</text>
+<rect x="2140" y="485" width="220" height="105" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="2250.0" y="503.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">Noticia</text>
+<line x1="2140" y1="510" x2="2360" y2="510" stroke="#333333" stroke-width="1.0"/>
+<text x="2153.0" y="526.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-idNoticia: String</text>
+<text x="2153.0" y="541.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-titulo: String</text>
+<text x="2153.0" y="556.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-contenido: String</text>
+<text x="2153.0" y="571.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-categoria: String</text>
+<rect x="1415" y="555" width="215" height="105" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1522.5" y="573.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">Suscriptor</text>
+<line x1="1415" y1="580" x2="1630" y2="580" stroke="#333333" stroke-width="1.0"/>
+<text x="1428.0" y="596.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-idSuscripcion: String</text>
+<text x="1428.0" y="611.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-categorias: String[]</text>
+<text x="1428.0" y="626.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-modalidad: String</text>
+<text x="1428.0" y="641.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-estadoPago: String</text>
+<rect x="1415" y="700" width="215" height="105" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="1522.5" y="718.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">EventoStripe</text>
+<line x1="1415" y1="725" x2="1630" y2="725" stroke="#333333" stroke-width="1.0"/>
+<text x="1428.0" y="741.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-idEvento: String</text>
+<text x="1428.0" y="756.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tipo: String</text>
+<text x="1428.0" y="771.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-idSuscripcionStripe: String</text>
+<text x="1428.0" y="786.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-numIntento: int</text>
+<rect x="2130" y="800" width="230" height="90" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="2245.0" y="818.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">EventoUso</text>
+<line x1="2130" y1="825" x2="2360" y2="825" stroke="#333333" stroke-width="1.0"/>
+<text x="2143.0" y="841.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tipoEvento: String</text>
+<text x="2143.0" y="856.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tipoDispositivo: String</text>
+<text x="2143.0" y="871.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tiempoPermanencia: double</text>
+<rect x="2130" y="1135" width="230" height="105" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<text x="2245.0" y="1153.2" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#222222">Metricas</text>
+<line x1="2130" y1="1160" x2="2360" y2="1160" stroke="#333333" stroke-width="1.0"/>
+<text x="2143.0" y="1176.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-masLeidas: String[]</text>
+<text x="2143.0" y="1191.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tiempoPermanenciaMedio: double</text>
+<text x="2143.0" y="1206.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-tasaRebote: double</text>
+<text x="2143.0" y="1221.2" font-family="Arial, Helvetica, sans-serif" font-size="13" text-anchor="start" fill="#222222">-conversiones: int</text>
+<polygon points="16,328 294,328 306,340 306,458 16,458" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="294,328 294,340 306,340" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="25.0" y="349.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Estilo Cliente-Servidor en capas (ADR-0001.3)</text>
+<text x="25.0" y="363.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Cliente -&gt; Lógica de negocio -&gt; Acceso a</text>
+<text x="25.0" y="378.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">datos.</text>
+<text x="25.0" y="392.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Comunicación HTTP/REST (JSON), servidor sin</text>
+<text x="25.0" y="407.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">estado.</text>
+<polygon points="480,1080 828,1080 840,1092 840,1205 480,1205" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="828,1080 828,1092 840,1092" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="489.0" y="1101.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrón Observer (ADR-0003 / 0006)</text>
+<text x="489.0" y="1115.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">WebhookController (Subject) recibe el webhook</text>
+<text x="489.0" y="1130.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">de Stripe y notifica a ServicioSuscripciones,</text>
+<text x="489.0" y="1144.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">que actualiza el estado de pago</text>
+<text x="489.0" y="1159.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">(al corriente, pago fallido, suspendida).</text>
+<polygon points="950,325 1378,325 1390,337 1390,440 950,440" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="1378,325 1378,337 1390,337" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="959.0" y="346.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrón Proxy de Protección (ADR-0004)</text>
+<text x="959.0" y="360.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Intercepta la lectura, valida el identificador</text>
+<text x="959.0" y="375.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">opaco y delega en el servicio real.</text>
+<text x="959.0" y="389.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Sin datos personales.</text>
+<polygon points="950,840 1138,840 1150,852 1150,935 950,935" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="1138,840 1138,852 1150,852" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="959.0" y="861.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Modalidades (ADR-0003)</text>
+<text x="959.0" y="875.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Trimestral: 70 €</text>
+<text x="959.0" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Semestral: 130 €</text>
+<text x="959.0" y="904.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Anual: 190 €</text>
+<polygon points="1405,840 1623,840 1635,852 1635,955 1405,955" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="1623,840 1623,852 1635,852" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="1414.0" y="861.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrón Adapter (ADR-0003)</text>
+<text x="1414.0" y="875.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">ServicioFacturacion solo conoce</text>
+<text x="1414.0" y="890.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">PasarelaPago; StripeAdapter es la</text>
+<text x="1414.0" y="904.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">única clase que habla con Stripe.</text>
+<polygon points="2140,165 2348,165 2360,177 2360,305 2140,305" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="2348,165 2348,177 2360,177" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="2149.0" y="186.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrón Publish-Subscribe</text>
+<text x="2149.0" y="200.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">(ADR-0004)</text>
+<text x="2149.0" y="215.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Cada una de las 5 categorías es un</text>
+<text x="2149.0" y="229.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">canal temático:</text>
+<text x="2149.0" y="244.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">los redactores publican y los</text>
+<text x="2149.0" y="258.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">suscriptores</text>
+<text x="2149.0" y="273.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">anónimos consumen.</text>
+<polygon points="2140,335 2348,335 2360,347 2360,430 2140,430" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="2348,335 2348,347 2360,347" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="2149.0" y="356.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Categorías (ADR-0004)</text>
+<text x="2149.0" y="370.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Política, Economía, Sociedad,</text>
+<text x="2149.0" y="385.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Nacionales, Internacionales.</text>
+<polygon points="2130,940 2348,940 2360,952 2360,1115 2130,1115" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="2348,940 2348,952 2360,952" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="2139.0" y="961.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrones Observer + Facade</text>
+<text x="2139.0" y="975.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">(ADR-0005)</text>
+<text x="2139.0" y="990.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">NoticiasServiceImpl y</text>
+<text x="2139.0" y="1004.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">ServicioSuscripciones notifican</text>
+<text x="2139.0" y="1019.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">los eventos de uso;</text>
+<text x="2139.0" y="1033.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">ServicioEstadisticas ofrece</text>
+<text x="2139.0" y="1048.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">una interfaz única con las 4</text>
+<text x="2139.0" y="1062.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">métricas (RF6).</text>
+<polygon points="2496,512 2864,512 2876,524 2876,637 2496,637" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="2864,512 2864,524 2876,524" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="2505.0" y="533.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Acceso directo sin DAO (ADR-0007)</text>
+<text x="2505.0" y="547.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Los servicios usan directamente el componente</text>
+<text x="2505.0" y="562.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">de acceso libpq, sin clases DAO intermedias.</text>
+<text x="2505.0" y="576.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Sin datos personales ni de tarjeta (ADR-0003 / 0004).</text>
+<polygon points="1064,1360 1422,1360 1434,1372 1434,1475 1064,1475" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="1422,1360 1422,1372 1434,1372" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="1073.0" y="1381.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrón Retry (ADR-0006)</text>
+<text x="1073.0" y="1395.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Política configurada a un máximo de 3 reintentos;</text>
+<text x="1073.0" y="1410.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">el backend procesa el resultado de cada intento.</text>
+<text x="1073.0" y="1424.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">El webhook no pasa por el API Gateway (ADR-0003).</text>
+<polygon points="136,512 384,512 396,524 396,607 136,607" fill="#FFFFFF" stroke="#333333" stroke-width="1.2"/>
+<polyline points="384,512 384,524 396,524" fill="none" stroke="#333333" stroke-width="1.2"/>
+<text x="145.0" y="533.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Patrón API Gateway (ADR-0002)</text>
+<text x="145.0" y="547.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">Punto único de entrada: discrimina</text>
+<text x="145.0" y="562.0" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">el dispositivo (PC, Tablet) en la</text>
+<text x="145.0" y="576.5" font-family="Arial, Helvetica, sans-serif" font-size="11" text-anchor="start" fill="#222222">cabecera X-Device-Type y redirige.</text>
+<polyline points="660.0,1079.0 660.0,1056.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1170.0,324.0 1170.0,296.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="2170.0,306.0 1971.0,484.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1441.0,956.0 1238.0,1109.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="2129.0,1031.0 2111.0,1031.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="2687.0,511.0 2689.0,386.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1231.0,1359.0 1186.0,1211.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="331.0,245.0 459.0,261.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="447.4,265.1 459.0,261.0 448.8,254.2" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="377.0" y="232.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="396.5" y="242.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="660.0,461.0 660.0,509.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="654.5,498.0 660.0,509.0 665.5,498.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="666.0" y="478.0" width="102.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="717.0" y="488.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">X-Device-Type</text>
+<rect x="609.0" y="479.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="628.5" y="489.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="2411.0,431.0 2479.0,415.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="2469.6,422.9 2479.0,415.0 2467.0,412.2" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="2422.0" y="402.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="2441.5" y="412.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="861.0,639.0 1017.0,461.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1013.9,472.9 1017.0,461.0 1005.6,465.6" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="908.0" y="534.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="927.5" y="544.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="861.0,870.0 929.0,870.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="918.0,875.5 929.0,870.0 918.0,864.5" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="876.0" y="849.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="895.5" y="859.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="660.0,1231.0 660.0,1265.0 1719.0,1075.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1709.1,1082.4 1719.0,1075.0 1707.2,1071.5" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="638.0" y="1244.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="657.5" y="1254.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="1411.0,319.0 1719.0,363.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1707.3,366.9 1719.0,363.0 1708.9,356.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1548.0" y="320.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1567.5" y="330.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="1651.0,652.0 1719.0,610.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1712.5,620.5 1719.0,610.0 1706.8,611.1" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1658.0" y="612.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1677.5" y="622.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="2050.0,711.0 2050.0,759.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="2044.5,748.0 2050.0,759.0 2055.5,748.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="2045.0" y="728.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="2064.5" y="738.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="1651.0,939.0 1719.0,952.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1707.2,955.3 1719.0,952.0 1709.2,944.5" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1669.0" y="924.0" width="39.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1688.5" y="934.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">«use»</text>
+<polyline points="1930.0,304.0 1930.0,261.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polygon points="1930.0,261.0 1935.5,272.0 1924.5,272.0" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<polyline points="1170.0,1109.0 1170.0,1081.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polygon points="1170.0,1081.0 1175.5,1092.0 1164.5,1092.0" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<polyline points="1925.0,939.0 1925.0,896.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polygon points="1925.0,896.0 1930.5,907.0 1919.5,907.0" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<polyline points="1391.0,225.0 1739.0,217.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polygon points="1739.0,217.0 1728.1,222.8 1727.9,211.8" fill="#FFFFFF" stroke="#333333" stroke-width="1.3"/>
+<polyline points="660.0,246.0 660.0,324.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="654.5,313.0 660.0,324.0 665.5,313.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="567.0" y="278.0" width="214.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="674.0" y="288.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">identifica el dispositivo con</text>
+<polyline points="1917.0,436.0 1908.0,484.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="1904.6,472.2 1908.0,484.0 1915.4,474.2" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1886.0" y="456.0" width="81.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1926.5" y="466.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">publica en</text>
+<polyline points="2148.0,431.0 2037.0,484.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1170.0,696.0 1170.0,719.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="1164.5,708.0 1170.0,719.0 1175.5,708.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1109.0" y="700.0" width="151.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1184.5" y="710.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">tramita el cobro con</text>
+<polyline points="1170.0,811.0 1170.0,984.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="1164.5,973.0 1170.0,984.0 1175.5,973.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1159.0" y="890.0" width="130.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1224.0" y="900.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">cobra a través de</text>
+<polyline points="1097.0,839.0 1125.0,811.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="1391.0,271.0 1739.0,335.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="1727.2,338.4 1739.0,335.0 1729.2,327.6" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1530.0" y="282.0" width="74.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1567.0" y="292.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">delega en</text>
+<polyline points="841.0,951.0 900.0,940.0 900.0,640.0 949.0,637.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="938.4,643.2 949.0,637.0 937.7,632.2" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="778.0" y="783.0" width="214.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="885.0" y="793.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">notifica el resultado de pago</text>
+<polyline points="1112.0,1211.0 887.0,1407.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="891.7,1395.6 887.0,1407.0 898.9,1403.9" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="859.0" y="1314.0" width="298.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1008.0" y="1324.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">solicita el cobro recurrente (HTTPS/REST)</text>
+<polyline points="679.0,1445.0 410.0,1440.0 410.0,985.0 479.0,985.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="468.0,990.5 479.0,985.0 468.0,979.5" fill="none" stroke="#333333" stroke-width="1.3"/>
+<polyline points="163.0,327.0 164.0,283.0" fill="none" stroke="#333333" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="372.0,511.0 537.0,436.0" fill="none" stroke="#888888" stroke-width="1.25" stroke-dasharray="6,4"/>
+<polyline points="2051.0,545.0 2139.0,542.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="2128.2,547.9 2139.0,542.0 2127.8,536.9" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="2064.0" y="521.0" width="60.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="2094.0" y="531.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">difunde</text>
+<polyline points="1391.0,614.0 1414.0,613.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="1403.2,619.0 1414.0,613.0 1402.8,608.0" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1369.0" y="592.0" width="67.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1402.5" y="602.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">gestiona</text>
+<polyline points="1367.0,696.0 1414.0,713.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="1401.8,714.4 1414.0,713.0 1405.5,704.1" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="1365.0" y="683.0" width="60.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="1395.0" y="693.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">procesa</text>
+<polyline points="2088.0,939.0 2168.0,891.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="2161.4,901.4 2168.0,891.0 2155.7,891.9" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="2087.0" y="896.0" width="67.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="2120.5" y="906.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">registra</text>
+<polyline points="2111.0,1124.0 2132.0,1134.0" fill="none" stroke="#333333" stroke-width="1.25"/>
+<polyline points="2119.7,1134.2 2132.0,1134.0 2124.4,1124.3" fill="none" stroke="#333333" stroke-width="1.3"/>
+<rect x="2097.0" y="1109.0" width="60.0" height="12.0" fill="#FFFFFF" fill-opacity="0.85" rx="2"/>
+<text x="2127.0" y="1119.3" font-family="Arial, Helvetica, sans-serif" font-size="12" text-anchor="middle" fill="#222222">calcula</text>
+</svg>

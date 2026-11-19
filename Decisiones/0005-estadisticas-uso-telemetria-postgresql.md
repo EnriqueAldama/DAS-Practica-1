@@ -7,7 +7,7 @@
 * **Informados (ASJ):** David Sticea, Elena Romera
 
 ## Contexto y Planteamiento del Problema
-Los administradores y redactores deben consultar cuatro métricas de uso: noticias más leídas, tiempo de permanencia, tasas de rebote y conversiones a suscriptores. La arquitectura vigente sigue el estilo Cliente-Servidor REST (ADR-0001.3), incorpora un `ApiGateway` que distingue PC y Tablet mediante `X-Device-Type` (ADR-0002.1), mantiene suscripciones anónimas (ADR-0004) y separa los datos en dos bases PostgreSQL 19: una para administración/redacción y otra para suscriptores. Es necesario decidir la arquitectura y los patrones de diseño para capturar y consultar estas métricas sin acoplar la lógica de negocio, sin romper el anonimato y sin añadir infraestructura innecesaria.
+Los administradores y redactores deben consultar cuatro métricas de uso: noticias más leídas, tiempo de permanencia, tasas de rebote y conversiones a suscriptores. La arquitectura vigente sigue el estilo Cliente-Servidor REST (ADR-0001.3), incorpora un `ApiGateway` que distingue PC y Tablet mediante `X-Device-Type` (ADR-0002), mantiene suscripciones anónimas (ADR-0004) y separa los datos en dos bases PostgreSQL 19: una para administración/redacción y otra para suscriptores. Es necesario decidir la arquitectura y los patrones de diseño para capturar y consultar estas métricas sin acoplar la lógica de negocio, sin romper el anonimato y sin añadir infraestructura innecesaria.
 
 ## Requisitos Motivadores (Decision Drivers)
 * **Requisito Clave:** RF6 - Estadísticas de uso (Los administradores y redactores pueden consultar las noticias más leídas, el tiempo de permanencia, las tasas de rebote y las conversiones a suscriptores).

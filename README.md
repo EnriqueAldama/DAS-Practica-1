@@ -56,17 +56,9 @@ El repositorio organiza los elementos del diseno en las siguientes carpetas:
 ## Entregables de la Semana 2
 
 ### 1. Registro de Decisiones Arquitectonicas (MADR)
-* **[ADR-0002.1: Incorporacion de API Gateway para Discriminacion de Clientes](Decisiones/0002.1-api-gateway-discriminacion-clientes.md)**
+* **[ADR-0002: Incorporacion de API Gateway para Discriminacion de Clientes](Decisiones/0002-api-gateway-discriminacion-clientes.md)**
   * *Requisito Clave:* RF1 (Discriminacion de clientes PC y Tablet).
   * *Decision:* Incorporacion de API Gateway perimetral con componente `DeviceDiscriminator`.
-  * *Estado:* Aceptada.
-* **[ADR-0002.2: Cuestionamiento Critico de Incorporacion de API Gateway](Decisiones/0002.2-cuestionamiento-incorporacion-api-gateway.md)**
-  * *Requisito Clave:* RF1 (Discriminacion de clientes PC y Tablet).
-  * *Decision:* Debate tecnico promovido por los ASC para evitar sobreingenieria y evaluar alternativas en frontend y middleware.
-  * *Estado:* Aceptada.
-* **[ADR-0002.3: Reafirmacion de Incorporacion de API Gateway](Decisiones/0002.3-reafirmacion-incorporacion-api-gateway.md)**
-  * *Requisito Clave:* RF1 (Discriminacion de clientes PC y Tablet).
-  * *Decision:* Ratificacion tecnica por los ASS delimitando estrictamente el API Gateway a identificacion y enrutamiento.
   * *Estado:* Aceptada.
 
 ### 2. Modelado Arquitectonico UML
